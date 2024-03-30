@@ -31,10 +31,6 @@ variable "consistency_level" {
   type = string
 }
 
-variable "subnet_id" {
-  type = string
-}
-
 variable "geo_location" {
   type = string
 }
@@ -60,4 +56,9 @@ variable "max_interval_in_seconds" {
 variable "max_staleness_prefix" {
   type    = number
   default = 100
+}
+
+variable "enable_monitor_alerts" {
+  type    = bool
+  default = false
 }

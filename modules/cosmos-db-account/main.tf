@@ -36,6 +36,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
 }
 
 resource "azurerm_monitor_metric_alert" "cosmosdb_ru_usage_warning_alert" {
+    count = var.enable_monitor_alerts == true ? 1 : 0
     name = "mma--${var.sub}-${var.region}-${var.environment}-${var.domain}-warning-alert"
     resource_group_name = var.resource_group_name
     scopes = [azurerm_cosmosdb_account.cosmosdb_account.id]
@@ -59,6 +60,7 @@ resource "azurerm_monitor_metric_alert" "cosmosdb_ru_usage_warning_alert" {
 }
 
 resource "azurerm_monitor_metric_alert" "cosmosdb_ru_usage_critical_alert" {
+    count = var.enable_monitor_alerts == true ? 1 : 0
     name = "mma--${var.sub}-${var.region}-${var.environment}-${var.domain}-critical-alert"
     resource_group_name = var.resource_group_name
     scopes = [azurerm_cosmosdb_account.cosmosdb_account.id]
