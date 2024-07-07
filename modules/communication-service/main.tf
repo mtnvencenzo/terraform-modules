@@ -3,6 +3,10 @@ resource "azurerm_communication_service" "communication_service" {
     resource_group_name = var.resource_group_name
     data_location       = var.data_location
     
+    lifecycle {
+        prevent_destroy = true
+    }
+
     tags = {
         Environment = var.environment
         Application = var.domain
