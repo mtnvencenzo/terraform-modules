@@ -40,8 +40,8 @@ variable "name_discriminator" {
 }
 
 variable "lock_duration" {
-  type    = number
-  default = 1
+  type    = string
+  default = "PT1M"
 }
 
 variable "requires_duplicate_detection" {
