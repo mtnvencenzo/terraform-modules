@@ -12,7 +12,7 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
     }
 
     network_rule_set {
-        default_action                  = Deny
+        default_action                  = "Deny"
         public_network_access_enabled   = false
         trusted_services_allowed        = true
 
