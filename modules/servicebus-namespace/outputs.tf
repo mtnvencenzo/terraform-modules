@@ -7,6 +7,6 @@ output "name" {
     value = azurerm_servicebus_namespace.servicebus_namespace.name
 }
 
-output "identity " {
+output "identity" {
     value = azurerm_servicebus_namespace.servicebus_namespace.identity
 }
