@@ -33,4 +33,5 @@ variable "location" {
 
 variable "subnet_ids" {
   type = list(string)
+  default = [ ]
 }
