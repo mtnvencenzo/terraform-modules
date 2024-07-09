@@ -16,10 +16,10 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
         public_network_access_enabled   = false
         trusted_services_allowed        = true
 
-        dynamic "network_rule" {
+        dynamic "network_rules" {
             for_each = var.subnet_ids
             content {
-                subnet_id = network_rule.value
+                subnet_id = each.value
             }
         }
     }
