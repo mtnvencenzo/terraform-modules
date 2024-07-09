@@ -56,7 +56,7 @@ variable "requires_session" {
 
 variable "dead_lettering_on_message_expiration" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "max_delivery_count" {
