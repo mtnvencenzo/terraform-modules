@@ -19,7 +19,7 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
         dynamic "network_rules" {
             for_each = var.subnet_ids
             content {
-                subnet_id = each.value
+                subnet_id = network_rules.value
             }
         }
     }
