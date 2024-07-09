@@ -31,10 +31,6 @@ variable "location" {
   default = "East US"
 }
 
-variable "namespace_id" {
-  type = string
-}
-
 variable "topic_id" {
   type    = string
 }
