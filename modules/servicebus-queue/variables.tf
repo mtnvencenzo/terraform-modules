@@ -65,6 +65,6 @@ variable "max_delivery_count" {
 }
 
 variable "duplicate_detection_history_time_window" {
-  type    = number
-  default = 10
+  type    = string
+  default = "PT10M"
 }
