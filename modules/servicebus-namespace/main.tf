@@ -25,7 +25,7 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
     # }
     
     lifecycle {
-        prevent_destroy = false
+        prevent_destroy = true
     }
 
     tags = {
