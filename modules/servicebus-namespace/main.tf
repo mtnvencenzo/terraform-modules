@@ -4,8 +4,8 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
     location                      = var.location
     sku                           = "Standard"
     minimum_tls_version           = "1.2"
-    public_network_access_enabled = false
-    local_auth_enabled            = false
+    public_network_access_enabled = var.public_network_access_enabled
+    local_auth_enabled            = var.local_auth_enabled
     
     identity {
         type = "SystemAssigned"
@@ -25,7 +25,7 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
     # }
     
     lifecycle {
-        prevent_destroy = true
+        prevent_destroy = var.prevent_destroy
     }
 
     tags = {

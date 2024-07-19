@@ -35,3 +35,18 @@ variable "subnet_ids" {
   type = list(string)
   default = [ ]
 }
+
+variable "local_auth_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "public_network_access_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "prevent_destroy" {
+  type    = bool
+  default = false
+}
