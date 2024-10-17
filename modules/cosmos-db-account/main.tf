@@ -5,7 +5,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     offer_type = "Standard"
     kind = "GlobalDocumentDB"
 
-    enable_automatic_failover = true
+    automatic_failover_enabled = true
     is_virtual_network_filter_enabled = true
     dynamic "virtual_network_rule" {
       for_each = var.subnet_ids
