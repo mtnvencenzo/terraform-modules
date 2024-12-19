@@ -48,7 +48,10 @@ resource "azurerm_monitor_metric_alert" "appinsights_standard_availability_test_
     auto_mitigate               = var.alert_auto_mitigate
     enabled                     = var.alert_enabled
     frequency                   = var.alert_frequency
-    scopes                      = [ data.azurerm_application_insights.appi.id ]
+    scopes                      = [
+        azurerm_application_insights_standard_web_test.appinsights_standard_availability_test.id,
+        var.application_insights_id
+    ]
     window_size                 = var.alert_window_size
 
     application_insights_web_test_location_availability_criteria {
