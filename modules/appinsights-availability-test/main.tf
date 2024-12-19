@@ -22,7 +22,7 @@ resource "azurerm_application_insights_standard_web_test" "appinsights_standard_
         parse_dependent_requests_enabled    = var.parse_dependent_requests_enabled
 
         dynamic "header" {
-            for_each = var.headers
+            for_each = toset(var.headers)
 
             content {
               name = each.value.name
