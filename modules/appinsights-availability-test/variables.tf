@@ -146,7 +146,7 @@ variable "alert_failed_location_count" {
 
 variable "alert_severity" {
   type = number
-  default = 2
+  default = 0
 }
 
 variable "headers" {
