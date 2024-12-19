@@ -102,11 +102,6 @@ variable "http_method" {
   default = "GET"
 }
 
-variable "enable_alert" {
-  type = bool
-  default = true
-}
-
 variable "alert_resource_group_name" {
   type = string
 }

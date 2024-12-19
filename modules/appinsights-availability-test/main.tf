@@ -41,7 +41,7 @@ resource "azurerm_application_insights_standard_web_test" "appinsights_standard_
 
 resource "azurerm_monitor_metric_alert" "appinsights_standard_availability_test_alert" {
     name                        = "alert-${var.sub}-${var.environment}-${var.domain}${var.name_discriminator}-availability"
-    count                       = var.enable_alert ? 1 : 0
+    count                       = var.alert_enabled ? 1 : 0
     resource_group_name         = var.alert_resource_group_name
     description                 = var.alert_description
     severity                    = var.alert_severity

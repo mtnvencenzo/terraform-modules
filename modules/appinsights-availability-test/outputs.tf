@@ -9,9 +9,9 @@ output "name" {
 
 
 output "alert_id" {
-    value = var.enable_alert ? azurerm_monitor_metric_alert.appinsights_standard_availability_test_alert.id : null
+    value = var.alert_enabled ? azurerm_monitor_metric_alert.appinsights_standard_availability_test_alert.id : null
 }
 
 output "alert_name" {
-    value = var.enable_alert ? azurerm_monitor_metric_alert.appinsights_standard_availability_test_alert.name : null
+    value = var.alert_enabled ? azurerm_monitor_metric_alert.appinsights_standard_availability_test_alert.name : null
 }
