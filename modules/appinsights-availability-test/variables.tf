@@ -144,6 +144,11 @@ variable "alert_severity" {
   default = 0
 }
 
+variable "create_alert" {
+  type = bool
+  default = true
+}
+
 variable "headers" {
   type = list(object({name = string, value = string}))
 }
