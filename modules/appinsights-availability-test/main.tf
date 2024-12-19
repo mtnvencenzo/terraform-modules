@@ -22,11 +22,11 @@ resource "azurerm_application_insights_standard_web_test" "appinsights_standard_
         parse_dependent_requests_enabled    = var.parse_dependent_requests_enabled
 
         dynamic "header" {
-            for_each = toset(var.headers)
+            for_each = {for hdr in var.headers: hdr.name => hdr}
 
             content {
-              name = header.name
-              value = header.value
+              name = "${each.value.name}"
+              value = "${each.value.value}"
             }
         }
     }
