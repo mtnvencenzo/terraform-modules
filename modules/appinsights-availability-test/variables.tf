@@ -150,5 +150,5 @@ variable "create_alert" {
 }
 
 variable "headers" {
-  type = map(object({name = string, value = string}))
+  type = list(object({name = string, value = string}))
 }

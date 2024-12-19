@@ -21,12 +21,13 @@ resource "azurerm_application_insights_standard_web_test" "appinsights_standard_
         follow_redirects_enabled            = var.follow_redirects_enabled
         parse_dependent_requests_enabled    = var.parse_dependent_requests_enabled
 
+
         dynamic "header" {
-            for_each = {for hdr in var.headers: hdr.name => hdr}
+            for_each = var.headers
 
             content {
-              name = "${each.value.name}"
-              value = "${each.value.value}"
+              name = header.value["name"]
+              value = header.value["value"]
             }
         }
     }
