@@ -25,8 +25,8 @@ resource "azurerm_application_insights_standard_web_test" "appinsights_standard_
             for_each = toset(var.headers)
 
             content {
-              name = each.value.name
-              value = each.value.value
+              name = each.name
+              value = each.value
             }
         }
     }
