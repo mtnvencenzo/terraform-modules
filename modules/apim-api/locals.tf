@@ -9,8 +9,8 @@ locals {
   anonomous_operation_policy = <<XML
       <policies>
         <inbound>
-          <set-backend-service backend-id="${azurerm_api_management_backend.apim_api_backend.name}" />
-          <include-fragment fragment-id="${ azurerm_api_management_policy_fragment.apim_api_cors_policy_fragment.name }" />
+          <set-backend-service backend-id="${var.environment}-${var.domain}-${var.name_discriminator}-backend" />
+          <include-fragment fragment-id="${var.environment}-${var.domain}-${var.name_discriminator}-cors-policy" />
         </inbound>
         <backend><base /></backend>
         <outbound><base /></outbound>
@@ -21,9 +21,9 @@ locals {
   b2c_auth_operation_policy = <<XML
       <policies>
         <inbound>
-          <include-fragment fragment-id="${ azurerm_api_management_policy_fragment.apim_api_b2c_policy_fragment.name }" />
-          <set-backend-service backend-id="${azurerm_api_management_backend.apim_api_backend.name}" />
-          <include-fragment fragment-id="${ azurerm_api_management_policy_fragment.apim_api_cors_policy_fragment.name }" />
+          <include-fragment fragment-id="${var.environment}-${var.domain}-${var.name_discriminator}-b2c-policy" />
+          <set-backend-service backend-id="${var.environment}-${var.domain}-${var.name_discriminator}-backend" />
+          <include-fragment fragment-id="${var.environment}-${var.domain}-${var.name_discriminator}-cors-policy" />
         </inbound>
         <backend><base /></backend>
         <outbound><base /></outbound>

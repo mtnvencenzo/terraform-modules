@@ -58,7 +58,7 @@ resource "azurerm_api_management_policy_fragment" "apim_api_cors_policy_fragment
 
 resource "azurerm_api_management_policy_fragment" "apim_api_b2c_policy_fragment" {
   api_management_id = data.azurerm_api_management.apim_shared.id
-  name              = "${var.environment}-${var.domain}-${var.name_discriminator}-cors-policy"
+  name              = "${var.environment}-${var.domain}-${var.name_discriminator}-b2c-policy"
   format            = "xml"
   value             = <<XML
       <fragment>
