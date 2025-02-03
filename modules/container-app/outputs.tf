@@ -6,3 +6,7 @@ output "id" {
 output "name" {
     value = azurerm_container_app.aca.name
 }
+
+output "fqdn" {
+    value = azurerm_container_app.aca.latest_revision_fqdn
+}

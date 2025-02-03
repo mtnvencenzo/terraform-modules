@@ -1,5 +1,3 @@
-
-
 resource "azurerm_api_management_api_version_set" "apim_api_version_set" {
   name                = "${var.environment}-${var.domain}-${var.name_discriminator}"
   resource_group_name = var.apim_instance.resource_group_name
