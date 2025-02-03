@@ -24,5 +24,5 @@ resource "azurerm_api_management_api_operation_policy" "apim_api_version_operati
   resource_group_name   = var.apim_instance.resource_group_name
   operation_id          = "${replace(" ", lower("${var.operations[count.index].method}-${var.operations[count.index].name}"), "-")}"
 
-  xml_content           = var.operations[count.index].security_type == "anonymous" ? locals.anonomous_operation_policy : locals.b2c_auth_operation_policy
+  xml_content           = var.operations[count.index].security_type == "anonymous" ? local.anonomous_operation_policy : local.b2c_auth_operation_policy
 }

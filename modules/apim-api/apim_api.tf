@@ -41,7 +41,7 @@ resource "azurerm_api_management_policy_fragment" "apim_api_cors_policy_fragment
       <fragment>
         <cors allow-credentials="true">
           <allowed-origins>
-            ${ join("\n", locals.apim_allowed_origins) }
+            ${ join("\n", local.apim_allowed_origins) }
           </allowed-origins>
           <allowed-methods>
             <method>*</method>
