@@ -5,8 +5,8 @@ resource "azurerm_api_management_api_operation" "apim_api_version_operation" {
   api_management_name   = var.apim_instance.name
   resource_group_name   = var.apim_instance.resource_group_name
 
-  operation_id          = "${replace(" ", lower("${each.method}-${each.name}"), "-")}"
-  method                = "${upper(each.methos)}"
+  operation_id          = "${replace(" ", lower("${each.value.method}-${each.value.name}"), "-")}"
+  method                = "${upper(each.value.method)}"
   display_name          = each.value.name
   url_template          = each.value.url_template
   description           = each.value.description
