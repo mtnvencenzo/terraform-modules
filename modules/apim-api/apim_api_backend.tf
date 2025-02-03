@@ -1,8 +1,8 @@
 
 resource "azurerm_api_management_named_value" "apim_api_backend_named_value_apimhostkey" {
   name                = "${var.environment}-${var.domain}-${var.name_discriminator}-apimhostkey"
-  api_management_name = data.azurerm_api_management.apim_shared.name
-  resource_group_name = data.azurerm_resource_group.global_shared_resource_group.name
+  resource_group_name = var.apim_instance.resource_group.name
+  api_management_name = var.apim_instance.name
   display_name        = "${var.environment}-${var.domain}-${var.name_discriminator}-apimhostkey"
   secret              = true
 
