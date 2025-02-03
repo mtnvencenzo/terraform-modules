@@ -28,6 +28,7 @@ variable "api" {
   type = object({
     version       = number
     service_fqdn  = string
+    ingress_fqdn  = string
     audience      = string
   })
 }
@@ -66,11 +67,6 @@ variable "b2c_auth" {
 variable "allowed_origins" {
   type = list(string)
   default = []
-}
-
-variable "subscription_limit" {
-  type = number
-  default = null
 }
 
 variable "subscriptions" {

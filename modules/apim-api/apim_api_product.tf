@@ -4,7 +4,7 @@ resource "azurerm_api_management_product" "apim_api_product" {
     api_management_name   = var.apim_instance.name
     display_name          = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)}"
     subscription_required = true
-    subscriptions_limit   = var.subscription_limit
+    subscriptions_limit   = length(var.subscriptions)
     approval_required     = true
     published             = true
 }
