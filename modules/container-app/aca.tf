@@ -15,8 +15,8 @@ resource "azurerm_container_app" "aca" {
       for_each = toset(var.ingress_traffic_weights)
 
       content {
-        latest_revision = each.value.latest_revision
-        percentage      = each.value.percentage
+        latest_revision = each.latest_revision
+        percentage      = each.percentage
       }
     }
   }
@@ -35,9 +35,9 @@ resource "azurerm_container_app" "aca" {
     for_each = toset(var.secrets)
 
     content {
-      name                = each.value.name
+      name                = each.name
       identity            = azurerm_user_assigned_identity.aca_user_identity.id
-      key_vault_secret_id = "https://${var.key_vault.name}.vault.azure.net/secrets/${each.value.key_vault_secret_name}"
+      key_vault_secret_id = "https://${var.key_vault.name}.vault.azure.net/secrets/${each.key_vault_secret_name}"
     }
   }
 
@@ -62,8 +62,8 @@ resource "azurerm_container_app" "aca" {
         for_each = toset(var.env_vars)
 
         content {
-          name    = each.value.name
-          value   = each.value.value
+          name    = each.name
+          value   = each.value
         }
       }
 
@@ -71,8 +71,8 @@ resource "azurerm_container_app" "aca" {
         for_each = toset(var.env_secret_vars)
 
         content {
-          name          = each.value.name
-          secret_name   = each.value.secret_name
+          name          = each.name
+          secret_name   = each.secret_name
         }
       }
     }
