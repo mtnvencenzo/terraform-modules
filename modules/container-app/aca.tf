@@ -12,7 +12,7 @@ resource "azurerm_container_app" "aca" {
     target_port                = var.ingress_target_port
     
     dynamic "traffic_weight" {
-      for_each = var.ingress_traffic_weights
+      for_each = toset(var.ingress_traffic_weights)
 
       content {
         latest_revision = each.value.latest_revision
@@ -32,7 +32,7 @@ resource "azurerm_container_app" "aca" {
   }
 
   dynamic "secret" {
-    for_each = var.secrets
+    for_each = toset(var.secrets)
 
     content {
       name                = each.value.name
@@ -59,7 +59,7 @@ resource "azurerm_container_app" "aca" {
       }
 
       dynamic "env" {
-        for_each = var.env_vars
+        for_each = toset(var.env_vars)
 
         content {
           name    = each.value.name
@@ -68,7 +68,7 @@ resource "azurerm_container_app" "aca" {
       }
 
       dynamic "env" {
-        for_each = var.env_secret_vars
+        for_each = toset(var.env_secret_vars)
 
         content {
           name          = each.value.name
