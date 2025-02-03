@@ -8,7 +8,6 @@ resource "azurerm_key_vault_access_policy" "apim_keyvault_policy" {
 }
 
 resource "azurerm_api_management_logger" "apim_appinsights_logger" {
-  count               = var.application_insights != null ? 1 : 0
   name                = "${var.environment}-${var.domain}-appinsights-logger"
   description         = "${title(var.environment)} ${var.domain} app insights logger for the api management instance"
   resource_group_name = var.apim_instance.resource_group_name
