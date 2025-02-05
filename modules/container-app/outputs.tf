@@ -7,6 +7,6 @@ output "name" {
     value = azurerm_container_app.aca.name
 }
 
-output "fqdn" {
-    value = azurerm_container_app.aca.latest_revision_fqdn
+output "ingress_fqdn" {
+    value = azurerm_container_app.aca.ingress[0].fqdn
 }
