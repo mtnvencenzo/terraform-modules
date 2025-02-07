@@ -39,3 +39,17 @@ resource "azurerm_key_vault_access_policy" "keyvault_pipeline_access_policy" {
       azurerm_key_vault.keyvault
     ]
 }
+
+resource "azurerm_key_vault_secret" "keyvault_secrets" {
+  for_each = toset(var.secrets)
+
+  name = each.value.name
+  value = each.value.value
+  key_vault_id = azurerm_key_vault.keyvault.id
+
+  depends_on = [ 
+    azurerm_key_vault.keyvault,
+    azurerm_key_vault_access_policy.keyvault_pipeline_access_policy
+  ]
+}
+

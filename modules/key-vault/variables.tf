@@ -46,3 +46,11 @@ variable "resource_group_location" {
 variable "virtual_network_subnet_ids" {
   type = list(string)
 }
+
+variable "secrets" {
+  type = list(object({
+     name = string,
+     value = string
+  }))
+  default = []
+}
