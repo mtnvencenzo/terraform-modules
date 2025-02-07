@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "keyvault" {
-  name = "kv-${var.sub}${var.region}${var.environment}-${var.shortdomain}${var.sequence}"
+  name = "kv-${var.sub}-${var.region}-${var.environment}-${var.shortdomain}-${var.sequence}"
   
   resource_group_name             = var.resource_group_name
   location                        = var.resource_group_location
