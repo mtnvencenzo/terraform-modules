@@ -41,7 +41,10 @@ resource "azurerm_key_vault_access_policy" "keyvault_pipeline_access_policy" {
 }
 
 resource "azurerm_key_vault_secret" "keyvault_secrets" {
-  for_each = toset(var.secrets)
+  for_each = tomap({
+    for secret in var.secrets :
+      secret.name => t
+  })
 
   name = each.value.name
   value = each.value.value
