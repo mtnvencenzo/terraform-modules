@@ -1,14 +1,14 @@
 resource "azurerm_api_management_api_operation" "apim_api_version_operation" {
   for_each = tomap({
     for operation in var.operations :
-      "${replace("-", replace(" ", lower("${operation.method}-${operation.name}"), "_"), "_")}" => operation
+      "${replace("-", replace(" ", "${operation.method}_${operation.name}", "_"), "_")}" => operation
   })
 
   api_name              = azurerm_api_management_api.apim_api_version.name
   api_management_name   = var.apim_instance.name
   resource_group_name   = var.apim_instance.resource_group_name
 
-  operation_id          = "${replace(" ", lower("${each.value.method}-${each.value.name}"), "-")}"
+  operation_id          = replace(" ", lower("${each.value.method}-${each.value.name}"), "-")
   method                = "${upper(each.value.method)}"
   display_name          = each.value.display_name
   url_template          = each.value.url_template
