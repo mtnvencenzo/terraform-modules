@@ -1,5 +1,8 @@
-resource "azurerm_api_management_subscription" "apim_api_product_subscription" {
-  for_each = toset(var.subscriptions)
+resource "azurerm_api_management_subscription" "apim_api_product_subscriptions" {
+  for_each = tomap({
+    for subscription in var.subscriptions :
+      subscription.name => subscription
+  })
 
   resource_group_name   = var.apim_instance.resource_group_name
   api_management_name   = var.apim_instance.name
