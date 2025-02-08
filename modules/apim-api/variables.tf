@@ -87,10 +87,10 @@ variable "operations" {
     success_status_code = number
     security_type       = string
 
-    template_parameters = list(object({
+    template_parameters = optional(list(object({
       name = string
       type = string
-    }))
+    })), [])
   }))
   default = []
 }

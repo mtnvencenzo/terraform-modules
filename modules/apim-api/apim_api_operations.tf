@@ -15,7 +15,7 @@ resource "azurerm_api_management_api_operation" "apim_api_version_operations" {
   description           = each.value.description
 
   dynamic "template_parameter" {
-      for_each = toset(each.value.template_parameters != null ? each.value.template_parameters : [])
+      for_each = toset(each.value.template_parameters)
 
       content {
         name      = template_parameter.value["name"]
