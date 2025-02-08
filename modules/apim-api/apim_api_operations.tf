@@ -30,6 +30,8 @@ resource "azurerm_api_management_api_operation_policy" "apim_api_version_operati
   xml_content           = var.operations[count.index].security_type == "anonymous" ? local.anonomous_operation_policy : local.b2c_auth_operation_policy
 
   depends_on = [ 
-    azurerm_api_management_api_operation.apim_api_version_operations
+    azurerm_api_management_api_operation.apim_api_version_operations,
+    azurerm_api_management_policy_fragment.apim_api_cors_policy_fragment,
+    azurerm_api_management_policy_fragment.apim_api_b2c_policy_fragment
   ]
 }
