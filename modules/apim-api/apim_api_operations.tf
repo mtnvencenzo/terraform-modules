@@ -14,6 +14,16 @@ resource "azurerm_api_management_api_operation" "apim_api_version_operations" {
   url_template          = each.value.url_template
   description           = each.value.description
 
+  dynamic "template_parameter" {
+      for_each = toset(each.value.template_parameters != null ? each.value.template_parameters : [])
+
+      content {
+        name      = template_parameter.value["name"]
+        type      = template_parameter.value["type"]
+        required  = true
+      }
+  }
+
   response {
     status_code = each.value.success_status_code
   }
