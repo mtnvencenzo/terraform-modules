@@ -1,7 +1,7 @@
 resource "azurerm_api_management_api_operation" "apim_api_version_operation" {
   for_each = tomap({
     for operation in var.operations :
-      "${replace("-", replace(" ", lower("${each.value.method}-${each.value.name}"), "_"), "_")}" => operation
+      "${replace("-", replace(" ", lower("${operation.method}-${operation.name}"), "_"), "_")}" => operation
   })
 
   api_name              = azurerm_api_management_api.apim_api_version.name
