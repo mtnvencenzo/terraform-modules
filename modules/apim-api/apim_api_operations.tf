@@ -1,7 +1,7 @@
 resource "azurerm_api_management_api_operation" "apim_api_version_operation" {
   for_each = tomap({
     for operation in var.operations :
-      "${replace("-", replace(" ", "${operation.method}_${operation.name}", "_"), "_")}" => operation
+      replace(" ", operation.display_name, "_") => operation
   })
 
   api_name              = azurerm_api_management_api.apim_api_version.name
@@ -25,7 +25,7 @@ resource "azurerm_api_management_api_operation_policy" "apim_api_version_operati
   api_name              = azurerm_api_management_api.apim_api_version.name
   api_management_name   = var.apim_instance.name
   resource_group_name   = var.apim_instance.resource_group_name
-  operation_id          = "${replace(" ", lower("${var.operations[count.index].method}-${var.operations[count.index].display_name}"), "-")}"
+  operation_id          = var.operations[count.index].operation_id
 
   xml_content           = var.operations[count.index].security_type == "anonymous" ? local.anonomous_operation_policy : local.b2c_auth_operation_policy
 }
