@@ -80,6 +80,7 @@ variable "subscriptions" {
 
 variable "operations" {
   type = list(object({
+    operation_id        = string
     display_name        = string
     method              = string
     url_template        = string
