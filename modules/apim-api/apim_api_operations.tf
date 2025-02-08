@@ -1,5 +1,8 @@
 resource "azurerm_api_management_api_operation" "apim_api_version_operation" {
-  for_each = toset(var.operations)
+  for_each = tomap({
+    for operation in var.operations :
+      "${operation.method}-${operation.url_template}" => operation
+  })
 
   api_name              = azurerm_api_management_api.apim_api_version.name
   api_management_name   = var.apim_instance.name
