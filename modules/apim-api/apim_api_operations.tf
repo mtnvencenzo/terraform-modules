@@ -7,7 +7,7 @@ resource "azurerm_api_management_api_operation" "apim_api_version_operation" {
 
   operation_id          = "${replace(" ", lower("${each.value.method}-${each.value.name}"), "-")}"
   method                = "${upper(each.value.method)}"
-  display_name          = each.value.name
+  display_name          = each.value.display_name
   url_template          = each.value.url_template
   description           = each.value.description
 
