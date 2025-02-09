@@ -50,8 +50,7 @@ variable "virtual_network_subnet_ids" {
 variable "secrets" {
   type = list(object({
      name = string,
-     value = string,
-     ignore_value = optional(string, false)
+     value = string
   }))
   default = []
 }

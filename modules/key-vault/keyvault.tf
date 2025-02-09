@@ -50,10 +50,6 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
   value = each.value.value
   key_vault_id = azurerm_key_vault.keyvault.id
 
-  lifecycle {
-    ignore_changes = each.value.ignore_value == true ? [ value ] : []
-  }
-
   depends_on = [ 
     azurerm_key_vault.keyvault,
     azurerm_key_vault_access_policy.keyvault_pipeline_access_policy
