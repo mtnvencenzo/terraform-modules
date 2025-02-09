@@ -23,3 +23,7 @@ output "managed_identity_principal_id" {
     value = azurerm_user_assigned_identity.aca_user_identity.principal_id
 }
 
+output "custom_domain_verification_id" {
+    value = azurerm_container_app.aca.custom_domain_verification_id
+}
+
