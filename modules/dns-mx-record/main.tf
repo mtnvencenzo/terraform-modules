@@ -8,8 +8,8 @@ resource "azurerm_dns_mx_record" "dns_mx_record" {
     for_each = toset(var.record_exchanges)
 
     content {
-      preference  = env.value["preference"]
-      exchange    = env.value["exchange"]
+      preference  = record.value["preference"]
+      exchange    = record.value["exchange"]
     }
   }
 }
