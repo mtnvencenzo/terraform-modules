@@ -13,7 +13,7 @@ resource "azurerm_container_app_environment_dapr_component" "aca_dapr_components
   scopes                        = each.value.scopes != null ? each.value.scopes : [var.dapr.app_id]
 
   dynamic "metadata" {
-    for_each = dapr_component.metadata
+    for_each = each.value.metadata
     
     content {
       name = metadata.name
