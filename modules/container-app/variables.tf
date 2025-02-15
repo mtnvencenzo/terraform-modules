@@ -150,3 +150,21 @@ variable "env_secret_vars" {
   }))
   default = []
 }
+
+variable "dapr" {
+  type = optional(object({
+    app_id        = string
+    app_protocol  = optional(string)
+
+    components    = list(object({
+      name            = string
+      component_type  = string
+      version         = optional(string)
+      scopes          = optional(list(string))
+      metadata        = list(object({
+        name = string
+        value = string
+      }))
+    }))
+  }))
+}

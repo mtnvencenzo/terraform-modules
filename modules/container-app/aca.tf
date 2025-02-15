@@ -40,6 +40,16 @@ resource "azurerm_container_app" "aca" {
       key_vault_secret_id = "https://${var.key_vault.name}.vault.azure.net/secrets/${secret.value["key_vault_secret_name"]}"
     }
   }
+  
+  dynamic "dapr" {
+    for_each = var.dapr != null ? [0] : []
+
+    content {
+      app_id = var.dapr.app_id
+      app_port = var.ingress_target_port
+      app_protocol = var.dapr.app_protocol != null ? var.dapr.app_protocol : "http"
+    }
+  }
 
   template {
     min_replicas = var.min_replicas
