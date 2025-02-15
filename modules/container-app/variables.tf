@@ -163,7 +163,7 @@ variable "dapr" {
       scopes          = optional(list(string))
       metadata        = list(object({
         name = string
-        value = string
+        value = optional(string)
       }))
     }))
   })
