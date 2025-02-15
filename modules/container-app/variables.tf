@@ -152,7 +152,7 @@ variable "env_secret_vars" {
 }
 
 variable "dapr" {
-  type = optional(object({
+  type = object({
     app_id        = string
     app_protocol  = optional(string)
 
@@ -166,5 +166,6 @@ variable "dapr" {
         value = string
       }))
     }))
-  }))
+  })
+  default = null
 }
