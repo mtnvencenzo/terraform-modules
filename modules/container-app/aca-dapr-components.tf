@@ -17,7 +17,7 @@ resource "azurerm_container_app_environment_dapr_component" "aca_dapr_components
     
     content {
       name = metadata.value["name"]
-      value = metadata.value["name"] == "azureClientId" ? azurerm_user_assigned_identity.aca_user_identity.principal_id : metadata.value["value"]
+      value = metadata.value["name"] == "azureClientId" ? azurerm_user_assigned_identity.aca_user_identity.client_id : metadata.value["value"]
     }
   }
 
