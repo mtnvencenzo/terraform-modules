@@ -56,3 +56,26 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
   ]
 }
 
+resource "azurerm_key_vault_secret" "keyvault_secrets_ignored" {
+  for_each = tomap({
+    for secret in var.secrets_values_ignored :
+      secret.name => secret
+  })
+
+  name = each.value.name
+  value = each.value.value
+  key_vault_id = azurerm_key_vault.keyvault.id
+
+  depends_on = [ 
+    azurerm_key_vault.keyvault,
+    azurerm_key_vault_access_policy.keyvault_pipeline_access_policy
+  ]
+
+  lifecycle {
+    ignore_changes = [ value ]
+  }
+}
+
+
+
+

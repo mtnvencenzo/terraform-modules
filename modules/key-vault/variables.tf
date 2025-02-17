@@ -54,3 +54,11 @@ variable "secrets" {
   }))
   default = []
 }
+
+variable "secrets_values_ignored" {
+  type = list(object({
+     name = string,
+     value = string
+  }))
+  default = []
+}
