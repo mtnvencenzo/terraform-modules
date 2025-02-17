@@ -37,6 +37,7 @@ variable "geo_location" {
 
 variable "action_group_id" {
   type    = string
+  default = ""
 }
 
 variable "subnet_ids" {
