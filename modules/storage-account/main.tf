@@ -29,7 +29,7 @@ resource "azurerm_storage_account" "storage_account" {
 resource "azurerm_storage_container" "blob_containers" {
   for_each = tomap({
     for container in var.blob_containers :
-      contaner.name => container
+      container.name => container
   })
 
   name = each.value.name
