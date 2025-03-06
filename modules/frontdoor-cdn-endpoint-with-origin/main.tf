@@ -113,3 +113,9 @@ resource "azurerm_cdn_frontdoor_route" "frontdoor_cdn_route" {
     ]
   }
 }
+
+resource "azurerm_cdn_frontdoor_custom_domain_association" "frontdoor_cdn_custom_domain_route_association" {
+  count                           = var.custom_domain.dns_zone_id == null ? 0 : 1
+  cdn_frontdoor_custom_domain_id  = azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain.id
+  cdn_frontdoor_route_ids         = [azurerm_cdn_frontdoor_route.frontdoor_cdn_route.id]
+}
