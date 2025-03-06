@@ -66,10 +66,11 @@ resource "azurerm_cdn_frontdoor_rule" "frontdoor_cdn_ruleset_rule" {
 }
 
 resource "azurerm_cdn_frontdoor_custom_domain" "frontdoor_cdn_custom_domain" {
-  name                     = var.custom_domain.host_name
-  cdn_frontdoor_profile_id = var.cdn_frontdoor_profile_id
-  dns_zone_id              = var.custom_domain.dns_zone_id
-  host_name                = var.custom_domain.host_name
+  count                     = var.custom_domain.dns_zone_id == null ? 0 : 1
+  name                      = replace(var.custom_domain.host_name, ".", "-")
+  cdn_frontdoor_profile_id  = var.cdn_frontdoor_profile_id
+  dns_zone_id               = var.custom_domain.dns_zone_id
+  host_name                 = var.custom_domain.host_name
 
   tls {
     certificate_type    = "ManagedCertificate"
