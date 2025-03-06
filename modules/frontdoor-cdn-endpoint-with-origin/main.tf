@@ -92,7 +92,7 @@ resource "azurerm_cdn_frontdoor_route" "frontdoor_cdn_route" {
   supported_protocols    = ["Https"]
 
   link_to_default_domain          = var.custom_domain.dns_zone_id == null ? true : false
-  cdn_frontdoor_custom_domain_ids = var.custom_domain.dns_zone_id == null ? [] : [azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain.id]
+  cdn_frontdoor_custom_domain_ids = var.custom_domain.dns_zone_id == null ? [] : [azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain[0].id]
 
   cache {
     query_string_caching_behavior = "UseQueryString"
