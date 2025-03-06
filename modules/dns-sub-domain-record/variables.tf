@@ -21,3 +21,7 @@ variable "sub_domain" {
 variable "record_fqdn" {
   type = string
 }
+
+variable "custom_domain_verification_name" {
+  type = optional(string)
+}

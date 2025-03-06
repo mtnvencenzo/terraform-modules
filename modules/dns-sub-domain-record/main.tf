@@ -1,5 +1,5 @@
 resource "azurerm_dns_txt_record" "dns_sub_domain_txt_verification_record" {
-  name                = "asuid.${var.sub_domain}"
+  name                = var.custom_domain_verification_name != null ? var.custom_domain_verification_name : "asuid.${var.sub_domain}"
   zone_name           = var.dns_zone.name
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
