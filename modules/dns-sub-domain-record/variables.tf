@@ -23,5 +23,6 @@ variable "record_fqdn" {
 }
 
 variable "custom_domain_verification_name" {
-  type = optional(string)
+  type = string
+  default = null
 }
