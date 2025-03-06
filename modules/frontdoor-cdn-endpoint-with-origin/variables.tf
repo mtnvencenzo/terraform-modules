@@ -39,3 +39,11 @@ variable "cache_duration" {
   type = string
   default = "60.00:00:00"
 }
+
+variable "custom_domain" {
+  type = object({
+    host_name   = string
+    dns_zone_id = string
+  })
+  default = null
+}

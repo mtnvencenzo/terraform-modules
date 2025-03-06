@@ -65,19 +65,33 @@ resource "azurerm_cdn_frontdoor_rule" "frontdoor_cdn_ruleset_rule" {
   ]
 }
 
-resource "azurerm_cdn_frontdoor_route" "cocktails_images_cdn_route" {
+resource "azurerm_cdn_frontdoor_custom_domain" "frontdoor_cdn_custom_domain" {
+  name                     = var.custom_domain.host_name
+  cdn_frontdoor_profile_id = var.cdn_frontdoor_profile_id
+  dns_zone_id              = var.custom_domain.dns_zone_id
+  host_name                = var.custom_domain.host_name
+
+  tls {
+    certificate_type    = "ManagedCertificate"
+    minimum_tls_version = "TLS12"
+  }
+}
+
+resource "azurerm_cdn_frontdoor_route" "frontdoor_cdn_route" {
   name                          = "afdr-${var.sub}-${var.region}-${var.environment}-${var.domain}-${var.sequence}"
   cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.frontdoor_cdn_endpoint.id
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.frontdoor_cdn_origin_group.id
   cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.frontdoor_cdn_origin.id]
   cdn_frontdoor_rule_set_ids    = [azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_ruleset.id]
   enabled                       = true
-  link_to_default_domain        = true
 
   forwarding_protocol    = "MatchRequest"
   https_redirect_enabled = false
   patterns_to_match      = ["/*"]
   supported_protocols    = ["Https"]
+
+  link_to_default_domain          = var.custom_domain.dns_zone_id == null ? true : false
+  cdn_frontdoor_custom_domain_ids = var.custom_domain.dns_zone_id == null ? [] : [azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain.id]
 
   cache {
     query_string_caching_behavior = "UseQueryString"
