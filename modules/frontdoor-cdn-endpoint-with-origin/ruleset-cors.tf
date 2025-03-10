@@ -7,7 +7,7 @@ resource "azurerm_cdn_frontdoor_rule_set" "frontdoor_cdn_cors_ruleset" {
 resource "azurerm_cdn_frontdoor_rule" "frontdoor_cdn_cors_ruleset_origin_rules" {
   for_each                      = toset(var.allowed_origins)
 
-  name                          = "origin-rule-${index(var.allowed_origins, each.value)}"
+  name                          = "originrule${index(var.allowed_origins, each.value)}"
   cdn_frontdoor_rule_set_id     = azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_cors_ruleset[0].id
   order                         = 1
   behavior_on_match             = "Stop"

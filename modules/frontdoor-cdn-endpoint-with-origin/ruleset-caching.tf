@@ -6,7 +6,7 @@ resource "azurerm_cdn_frontdoor_rule_set" "frontdoor_cdn_caching_ruleset" {
 
 resource "azurerm_cdn_frontdoor_rule" "frontdoor_cdn_caching_ruleset_caching_rule" {
   count                       = var.caching_rule != null ? 1 : 0
-  name                        = "route-config-override-caching-rule"
+  name                        = "routeconfigoverridecachingrule"
   cdn_frontdoor_rule_set_id   = azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_caching_ruleset[0].id
   order                       = 1
   behavior_on_match           = "Continue"
