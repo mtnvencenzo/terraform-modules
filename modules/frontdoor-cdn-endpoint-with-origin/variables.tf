@@ -36,6 +36,7 @@ variable "custom_domain" {
     dns_zone_name             = string
     dns_zone_resource_group   = string
     sub_domain                = string
+    host_name                 = string
   })
   default = null
 }
