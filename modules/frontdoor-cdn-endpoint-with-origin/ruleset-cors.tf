@@ -1,5 +1,5 @@
 resource "azurerm_cdn_frontdoor_rule_set" "frontdoor_cdn_cors_ruleset" {
-  count                     = var.allowed_origins.count > 0 ? 1 : 0
+  count                     = length(var.allowed_origins) > 0 ? 1 : 0
   name                      = "${var.environment}${var.domain}cors"
   cdn_frontdoor_profile_id  = var.cdn_frontdoor_profile_id
 }
