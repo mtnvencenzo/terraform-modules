@@ -46,8 +46,8 @@ resource "azurerm_cdn_frontdoor_route" "frontdoor_cdn_route" {
   cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.frontdoor_cdn_origin.id]
 
   cdn_frontdoor_rule_set_ids    = compact([
-    length(var.allowed_origins) > 0 ? azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_cors_ruleset.id : null,
-    var.caching_rule != null ? azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_caching_ruleset.id : null
+    length(var.allowed_origins) > 0 ? azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_cors_ruleset[0].id : null,
+    var.caching_rule != null ? azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_caching_ruleset[0].id : null
   ])
 
   enabled                 = true
