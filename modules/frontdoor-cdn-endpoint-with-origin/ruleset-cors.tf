@@ -17,7 +17,7 @@ resource "azurerm_cdn_frontdoor_rule" "frontdoor_cdn_cors_ruleset_origin_rules" 
       header_name = "Origin"
       operator = "Equal"
       match_values = [lower(each.value)]
-      transforms = "Lowercase"
+      transforms = ["Lowercase"]
     }
   }
 
