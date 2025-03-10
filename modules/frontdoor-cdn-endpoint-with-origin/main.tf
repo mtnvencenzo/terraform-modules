@@ -39,64 +39,29 @@ resource "azurerm_cdn_frontdoor_origin" "frontdoor_cdn_origin" {
   weight                            = 1000
 }
 
-resource "azurerm_cdn_frontdoor_rule_set" "frontdoor_cdn_ruleset" {
-  name                     = var.cdn_ruleset_name
-  cdn_frontdoor_profile_id = var.cdn_frontdoor_profile_id
-}
-
-resource "azurerm_cdn_frontdoor_rule" "frontdoor_cdn_ruleset_rule" {
-  name                        = "cachingrule"
-  cdn_frontdoor_rule_set_id   = azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_ruleset.id
-  order                       = 1
-  behavior_on_match           = "Continue"
-
-  actions {
-    route_configuration_override_action {
-      query_string_caching_behavior = "UseQueryString"
-      cache_behavior                = "OverrideAlways"
-      cache_duration                = var.cache_duration
-      compression_enabled           = true
-    }
-  }
-
-  depends_on = [
-    azurerm_cdn_frontdoor_origin_group.frontdoor_cdn_origin_group,
-    azurerm_cdn_frontdoor_origin.frontdoor_cdn_origin
-  ]
-}
-
-resource "azurerm_cdn_frontdoor_custom_domain" "frontdoor_cdn_custom_domain" {
-  count                     = var.custom_domain.dns_zone_id == null ? 0 : 1
-  name                      = replace(var.custom_domain.host_name, ".", "-")
-  cdn_frontdoor_profile_id  = var.cdn_frontdoor_profile_id
-  dns_zone_id               = var.custom_domain.dns_zone_id
-  host_name                 = var.custom_domain.host_name
-
-  tls {
-    certificate_type    = "ManagedCertificate"
-    minimum_tls_version = "TLS12"
-  }
-}
-
 resource "azurerm_cdn_frontdoor_route" "frontdoor_cdn_route" {
   name                          = "afdr-${var.sub}-${var.region}-${var.environment}-${var.domain}-${var.sequence}"
   cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.frontdoor_cdn_endpoint.id
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.frontdoor_cdn_origin_group.id
   cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.frontdoor_cdn_origin.id]
-  cdn_frontdoor_rule_set_ids    = [azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_ruleset.id]
-  enabled                       = true
 
-  forwarding_protocol    = "MatchRequest"
-  https_redirect_enabled = false
-  patterns_to_match      = ["/*"]
-  supported_protocols    = ["Https"]
+  cdn_frontdoor_rule_set_ids    = compact([
+    var.allowed_origins.count > 0 ? azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_cors_ruleset.id : null,
+    var.caching_rule != null ? azurerm_cdn_frontdoor_rule_set.frontdoor_cdn_caching_ruleset.id : null
+  ])
+
+  enabled                 = true
+  forwarding_protocol     = "MatchRequest"
+  https_redirect_enabled  = true
+  patterns_to_match       = ["/*"]
+  supported_protocols     = ["Https"]
 
   link_to_default_domain          = var.custom_domain.dns_zone_id == null ? true : false
   cdn_frontdoor_custom_domain_ids = var.custom_domain.dns_zone_id == null ? [] : [azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain[0].id]
 
   cache {
-    query_string_caching_behavior = "UseQueryString"
-    compression_enabled = true
+    query_string_caching_behavior   = "UseQueryString"
+    compression_enabled             = true
     content_types_to_compress = [
       "application/eot",
       "application/font",
@@ -114,8 +79,3 @@ resource "azurerm_cdn_frontdoor_route" "frontdoor_cdn_route" {
   }
 }
 
-resource "azurerm_cdn_frontdoor_custom_domain_association" "frontdoor_cdn_custom_domain_route_association" {
-  count                           = var.custom_domain.dns_zone_id == null ? 0 : 1
-  cdn_frontdoor_custom_domain_id  = azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain[0].id
-  cdn_frontdoor_route_ids         = [azurerm_cdn_frontdoor_route.frontdoor_cdn_route.id]
-}

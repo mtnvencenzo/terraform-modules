@@ -31,19 +31,23 @@ variable "origin_host_name" {
   type = string
 }
 
-variable "cdn_ruleset_name" {
-  type = string
-}
-
-variable "cache_duration" {
-  type = string
-  default = "60.00:00:00"
-}
-
 variable "custom_domain" {
   type = object({
     host_name   = string
     dns_zone_id = string
   })
   default = null
+}
+
+variable "allowed_origins" {
+  type = list(string)
+  default = []
+}
+
+variable "caching_rule" {
+  type = object({
+    cache_duration = optional(string)
+    ignore_query_strings  = optional(bool)
+    compression_enabled = optional(bool)
+  })
 }
