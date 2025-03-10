@@ -52,7 +52,7 @@ resource "azurerm_cdn_frontdoor_route" "frontdoor_cdn_route" {
 
   enabled                 = true
   forwarding_protocol     = "MatchRequest"
-  https_redirect_enabled  = true
+  https_redirect_enabled  = false
   patterns_to_match       = ["/*"]
   supported_protocols     = ["Https"]
 
