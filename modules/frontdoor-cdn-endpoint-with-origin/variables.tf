@@ -33,8 +33,9 @@ variable "origin_host_name" {
 
 variable "custom_domain" {
   type = object({
-    host_name   = string
-    dns_zone_id = string
+    dns_zone_name             = string
+    dns_zone_resource_group   = string
+    sub_domain                = string
   })
   default = null
 }
