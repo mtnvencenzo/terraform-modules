@@ -11,6 +11,6 @@ resource "azurerm_role_assignment" "storage_container_role_assignments" {
   })
 
   scope                 = azurerm_storage_container.storage_container.resource_manager_id
-  role_definition_name  = role.role_definition_name
-  principal_id          = role.principal_id
+  role_definition_name  = each.value.role_definition_name
+  principal_id          = each.value.principal_id
 }
