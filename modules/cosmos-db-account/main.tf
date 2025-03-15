@@ -30,9 +30,15 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
       prevent_destroy = true
     }
 
-    tags = {
+    tags = merge({
         Environment = var.environment
         Application = var.domain
+    }, var.tags)
+
+    lifecycle {
+        ignore_changes = [
+            ip_range_filter
+        ]
     }
 }
 
@@ -51,6 +57,11 @@ resource "azurerm_monitor_metric_alert" "cosmosdb_ru_usage_warning_alert" {
       aggregation = "Average"
       metric_namespace = "Microsoft.DocumentDB/databaseAccounts"
     }
+
+    tags = merge({
+        Environment = var.environment
+        Application = var.domain
+    }, var.tags)
 
     action {
       action_group_id = var.action_group_id
@@ -79,6 +90,11 @@ resource "azurerm_monitor_metric_alert" "cosmosdb_ru_usage_critical_alert" {
     action {
       action_group_id = var.action_group_id
     }
+
+    tags = merge({
+        Environment = var.environment
+        Application = var.domain
+    }, var.tags)
 
     description = "Alert when RU usage reaches 90%"
     severity = 1

@@ -27,3 +27,8 @@ variable "record_exchanges" {
     exchange = string
   }))
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

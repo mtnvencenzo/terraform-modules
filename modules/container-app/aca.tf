@@ -6,6 +6,11 @@ resource "azurerm_container_app" "aca" {
   workload_profile_name           = var.workload_profile_name
   max_inactive_revisions          = var.max_inactive_revisions
 
+  tags = merge({
+      Environment = var.environment
+      Application = var.domain
+  }, var.tags)
+
   ingress {
     allow_insecure_connections = var.ingress_allow_insecure_connections
     external_enabled           = var.ingress_external_enabled

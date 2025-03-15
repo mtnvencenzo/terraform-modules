@@ -169,3 +169,8 @@ variable "dapr" {
   })
   default = null
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

@@ -7,8 +7,10 @@ resource "azurerm_communication_service" "communication_service" {
         prevent_destroy = true
     }
 
-    tags = {
+
+
+    tags = merge({
         Environment = var.environment
         Application = var.domain
-    }
+    }, var.tags)
 }

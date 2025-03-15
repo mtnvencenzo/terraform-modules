@@ -54,3 +54,8 @@ variable "caching_rule" {
     compression_enabled = optional(bool)
   })
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

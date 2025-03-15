@@ -18,3 +18,8 @@ variable "role_assignments" {
   }))
   default = []
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

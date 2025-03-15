@@ -46,3 +46,8 @@ variable "blob_containers" {
   }))
   default = []
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

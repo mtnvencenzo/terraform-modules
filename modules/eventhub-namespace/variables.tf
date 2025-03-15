@@ -35,3 +35,8 @@ variable "sequence" {
   type    = string
   default = "001"
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

@@ -152,3 +152,8 @@ variable "create_alert" {
 variable "headers" {
   type = list(object({name = string, value = string}))
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

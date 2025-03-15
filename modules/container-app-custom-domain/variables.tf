@@ -5,3 +5,8 @@ variable "container_app_id" {
 variable "name" {
   type = string
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

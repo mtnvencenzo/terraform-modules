@@ -68,3 +68,8 @@ variable "duplicate_detection_history_time_window" {
   type    = string
   default = "PT10M"
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

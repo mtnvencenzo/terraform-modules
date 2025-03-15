@@ -94,3 +94,8 @@ variable "operations" {
   }))
   default = []
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

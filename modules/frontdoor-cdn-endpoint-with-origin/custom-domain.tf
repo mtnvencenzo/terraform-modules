@@ -29,6 +29,11 @@ module "cocktails_cdn_dns_sub_domain_record" {
   sub_domain                      = var.custom_domain.sub_domain
   record_fqdn                     = azurerm_cdn_frontdoor_endpoint.frontdoor_cdn_endpoint.host_name
 
+  tags = merge({
+      Environment = var.environment
+      Application = var.domain
+  }, var.tags)
+  
   dns_zone = {
     name                = var.custom_domain.dns_zone_name
     resource_group_name = var.custom_domain.dns_zone_resource_group

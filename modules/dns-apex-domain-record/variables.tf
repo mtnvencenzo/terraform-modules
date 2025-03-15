@@ -17,3 +17,8 @@ variable "custom_domain_verification_id" {
 variable "host_ip_address" {
   type = string
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

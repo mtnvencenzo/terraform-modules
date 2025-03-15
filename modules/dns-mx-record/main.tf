@@ -3,6 +3,7 @@ resource "azurerm_dns_mx_record" "dns_mx_record" {
   zone_name           = var.dns_zone.name
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
+  tags = var.tags
 
   dynamic "record" {
     for_each = toset(var.record_exchanges)
@@ -20,6 +21,8 @@ resource "azurerm_dns_txt_record" "dns_mx_spf_record" {
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
 
+  tags = var.tags
+
   record {
     value = "v=spf1 include:${var.spf_include_domain} ~all"
   }
@@ -30,6 +33,8 @@ resource "azurerm_dns_txt_record" "dns_mx_dkim_record" {
   zone_name           = var.dns_zone.name
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
+
+  tags = var.tags
 
   record {
     value = var.dkim_record.value

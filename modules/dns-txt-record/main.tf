@@ -4,6 +4,8 @@ resource "azurerm_dns_txt_record" "dns_txt_record" {
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
 
+  tags = var.tags
+
   record {
     value = var.value
   }

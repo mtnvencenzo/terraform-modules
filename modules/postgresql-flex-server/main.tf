@@ -16,8 +16,8 @@ resource "azurerm_postgresql_flexible_server" "postgresql_flexible_server" {
       ignore_changes          = [ "zone" ]
     }
 
-    tags = {
-      Environment = var.environment
-      Application = var.domain
-    }
+    tags = merge({
+        Environment = var.environment
+        Application = var.domain
+    }, var.tags)
 }

@@ -10,10 +10,11 @@ resource "azurerm_application_insights_standard_web_test" "appinsights_standard_
     description                     = var.description
     retry_enabled                   = var.retry_enabled
     enabled                         = var.enabled
-    tags                            = {
-                                        Environment = var.environment
-                                        Application = var.domain
-                                    }
+
+    tags = merge({
+        Environment = var.environment
+        Application = var.domain
+    }, var.tags)
 
     request {
         url                                 = var.http_url
@@ -59,6 +60,11 @@ resource "azurerm_monitor_metric_alert" "appinsights_standard_availability_test_
         web_test_id = azurerm_application_insights_standard_web_test.appinsights_standard_availability_test.id
         component_id = var.application_insights_id
     }
+
+    tags = merge({
+        Environment = var.environment
+        Application = var.domain
+    }, var.tags)
 
     action {
         action_group_id = var.alert_action_group_id

@@ -47,3 +47,8 @@ variable "max_delivery_count" {
   type    = number
   default = 1
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

@@ -63,3 +63,8 @@ variable "postgres_version" {
 variable "create_mode" {
   type = string
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

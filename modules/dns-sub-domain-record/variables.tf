@@ -26,3 +26,8 @@ variable "custom_domain_verification_name" {
   type = string
   default = null
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

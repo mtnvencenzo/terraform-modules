@@ -30,3 +30,8 @@ variable "data_location" {
   type      = string
   default   = "United States"
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

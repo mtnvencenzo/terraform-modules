@@ -4,5 +4,5 @@ resource "azurerm_servicebus_topic" "servicebus_topic" {
 
     requires_duplicate_detection                = var.requires_duplicate_detection
     duplicate_detection_history_time_window     = var.duplicate_detection_history_time_window
-    support_ordering                            = var.support_ordering 
+    support_ordering                            = var.support_ordering
 }

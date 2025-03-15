@@ -62,3 +62,8 @@ variable "secrets_values_ignored" {
   }))
   default = []
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

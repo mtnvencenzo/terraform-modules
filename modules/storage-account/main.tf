@@ -10,10 +10,11 @@ resource "azurerm_storage_account" "storage_account" {
   https_traffic_only_enabled        = true
   min_tls_version				            = "TLS1_2"
   public_network_access_enabled	    = true
-  tags = {
+
+  tags = merge({
       Environment = var.environment
       Application = var.domain
-  }
+  }, var.tags)
 
   blob_properties {
     cors_rule{

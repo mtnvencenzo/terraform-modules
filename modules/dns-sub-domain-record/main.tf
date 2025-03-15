@@ -3,6 +3,7 @@ resource "azurerm_dns_txt_record" "dns_sub_domain_txt_verification_record" {
   zone_name           = var.dns_zone.name
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
+  tags                = var.tags
 
   record {
     value = lower(var.custom_domain_verification_id)
@@ -26,6 +27,7 @@ resource "azurerm_dns_cname_record" "dns_sub_domain_sname_record" {
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
   record              = var.record_fqdn
+  tags                = var.tags
 
   depends_on = [
     azurerm_dns_txt_record.dns_sub_domain_txt_verification_record,

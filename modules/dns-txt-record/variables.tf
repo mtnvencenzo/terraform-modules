@@ -17,3 +17,8 @@ variable "name" {
 variable "value" {
   type = string
 }
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}

@@ -1,10 +1,11 @@
 resource "azurerm_cdn_frontdoor_endpoint" "frontdoor_cdn_endpoint" {
     name                        = "afde-${var.sub}-${var.region}-${var.environment}-${var.domain}-${var.sequence}"
     cdn_frontdoor_profile_id    = var.cdn_frontdoor_profile_id
-    tags = {
+
+    tags = merge({
         Environment = var.environment
         Application = var.domain
-    }
+    }, var.tags)
 }
 
 resource "azurerm_cdn_frontdoor_origin_group" "frontdoor_cdn_origin_group" {

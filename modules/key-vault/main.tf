@@ -11,10 +11,10 @@ resource "azurerm_key_vault" "keyvault" {
   enabled_for_deployment          = true
   sku_name                        = "standard"
 
-  tags = {
+  tags = merge({
       Environment = var.environment
       Application = var.domain
-  }
+  }, var.tags)
 
   network_acls {
     bypass                      = "AzureServices"
@@ -46,6 +46,11 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
       secret.name => secret
   })
 
+  tags = merge({
+      Environment = var.environment
+      Application = var.domain
+  }, var.tags)
+
   name = each.value.name
   value = each.value.value
   key_vault_id = azurerm_key_vault.keyvault.id
@@ -61,6 +66,11 @@ resource "azurerm_key_vault_secret" "keyvault_secrets_ignored" {
     for secret in var.secrets_values_ignored :
       secret.name => secret
   })
+
+  tags = merge({
+      Environment = var.environment
+      Application = var.domain
+  }, var.tags)
 
   name = each.value.name
   value = each.value.value
