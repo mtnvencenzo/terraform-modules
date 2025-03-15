@@ -9,11 +9,6 @@ resource "azurerm_api_management_named_value" "apim_api_backend_named_value_apim
   value_from_key_vault {
     secret_id = var.keyvault_apimhostkey_secret_id
   }
-
-  tags = merge({
-      Environment = var.environment
-      Application = var.domain
-  }, var.tags)
 }
 
 resource "azurerm_api_management_backend" "apim_api_backend" {
