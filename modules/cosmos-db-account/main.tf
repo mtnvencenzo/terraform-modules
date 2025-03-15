@@ -26,16 +26,13 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
       failover_priority = 0
     }
 
-    lifecycle {
-      prevent_destroy = true
-    }
-
     tags = merge({
         Environment = var.environment
         Application = var.domain
     }, var.tags)
 
     lifecycle {
+        prevent_destroy = true
         ignore_changes = [
             ip_range_filter
         ]
