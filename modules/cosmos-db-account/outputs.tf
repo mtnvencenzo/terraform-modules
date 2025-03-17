@@ -17,3 +17,7 @@ output "cosmosdb_reader_role_id" {
 output "cosmosdb_contributor_role_id" {
     value = azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_contributor_role_definition.id
 }
+
+output "cosmosdb_enpdpoint" {
+    value = azurerm_cosmosdb_account.cosmosdb_account.endpoint
+}
