@@ -39,7 +39,6 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
 }
 
-
 resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_definition" {
   name                = "14d5c255-8508-4ea2-941e-7044fe5db968"
   resource_group_name = var.resource_group_name
