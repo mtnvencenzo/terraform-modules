@@ -16,7 +16,7 @@ resource "azurerm_cosmosdb_sql_role_assignment" "sql_db_role_assignments" {
   account_name        = var.cosmosdb_account_name
   role_definition_id  = each.value.role_definition_id
   principal_id        = each.value.principal_id
-  scope               = azurerm_cosmosdb_sql_database.sql_db.id
+  scope               = replace(azurerm_cosmosdb_sql_database.sql_db.id, "sqlDatabases", "dbs")
 }
 
 
