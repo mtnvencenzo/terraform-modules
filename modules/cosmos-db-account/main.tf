@@ -41,7 +41,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
 
 
 resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_definition" {
-  name                = "Custom Cosmos DB Built-in Data Reader"
+  name                = "Cosmos DB Custom Data Reader"
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
   type                = "CustomRole"
@@ -58,7 +58,7 @@ resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_def
 }
 
 resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_contributor_role_definition" {
-  name                = "Cosmos DB Built-in Data Contributor"
+  name                = "Cosmos DB Custom Data Contributor"
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
   type                = "CustomRole"
