@@ -39,6 +39,40 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
 }
 
+
+resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_definition" {
+  name                = "Custom Cosmos DB Built-in Data Reader"
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
+  type                = "CustomRole"
+  assignable_scopes   = [azurerm_cosmosdb_account.cosmosdb_account.id]
+
+  permissions {
+    data_actions = [
+      "Microsoft.DocumentDB/databaseAccounts/readMetadata",
+      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/executeQuery",
+      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/readChangeFeed",
+      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read"
+    ]
+  }
+}
+
+resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_contributor_role_definition" {
+  name                = "Cosmos DB Built-in Data Contributor"
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
+  type                = "CustomRole"
+  assignable_scopes   = [azurerm_cosmosdb_account.cosmosdb_account.id]
+
+  permissions {
+    data_actions = [
+      "Microsoft.DocumentDB/databaseAccounts/readMetadata",
+      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/*",
+      "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/*"
+    ]
+  }
+}
+
 resource "azurerm_monitor_metric_alert" "cosmosdb_ru_usage_warning_alert" {
     count = var.enable_monitor_alerts == true ? 1 : 0
     name = "mma--${var.sub}-${var.region}-${var.environment}-${var.domain}-warning-alert"
