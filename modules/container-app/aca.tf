@@ -73,6 +73,10 @@ resource "azurerm_container_app" "aca" {
         timeout = 10
       }
 
+      # -------------------------------------------------------------------------------------------------
+      # must set the managed identities client id to use with rbac / msi tokens to access other resources
+      # see > https://github.com/microsoft/azure-container-apps/issues/325#issuecomment-1265380377
+      # -------------------------------------------------------------------------------------------------
       env {
         name  = "AZURE_CLIENT_ID"
         value = azurerm_user_assigned_identity.aca_user_identity.client_id
