@@ -17,6 +17,8 @@ resource "azurerm_cosmosdb_sql_role_assignment" "sql_db_role_assignments" {
   role_definition_id  = each.value.role_definition_id
   principal_id        = each.value.principal_id
   scope               = replace(azurerm_cosmosdb_sql_database.sql_db.id, "sqlDatabases", "dbs")
+
+  depends_on = [azurerm_cosmosdb_sql_database.sql_db]
 }
 
 
@@ -46,4 +48,6 @@ resource "azurerm_cosmosdb_sql_container" "sql_containers" {
   unique_key {
     paths = each.value.unique_key_paths
   }
+  
+  depends_on = [azurerm_cosmosdb_sql_database.sql_db]
 }
