@@ -39,8 +39,9 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     }
 }
 
+
 resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_definition" {
-  name                = "14d5c255-8508-4ea2-941e-7044fe5db968"
+  name                = "Custom Cosmos DB Built-in Data Reader"
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
   type                = "CustomRole"
@@ -57,7 +58,7 @@ resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_def
 }
 
 resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_contributor_role_definition" {
-  name                = "27c0645e-bc81-43cd-9607-2377e2660d2a"
+  name                = "Cosmos DB Built-in Data Contributor"
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
   type                = "CustomRole"
