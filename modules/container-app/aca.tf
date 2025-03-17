@@ -73,6 +73,11 @@ resource "azurerm_container_app" "aca" {
         timeout = 10
       }
 
+      env {
+        name  = "AZURE_CLIENT_ID"
+        value = azurerm_user_assigned_identity.aca_user_identity.client_id
+      }
+
       dynamic "env" {
         for_each = toset(var.env_vars)
 
