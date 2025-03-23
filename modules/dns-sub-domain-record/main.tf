@@ -6,7 +6,7 @@ resource "azurerm_dns_txt_record" "dns_sub_domain_txt_verification_record" {
   tags                = var.tags
 
   record {
-    value = lower(var.custom_domain_verification_id)
+    value = var.custom_domain_verification_id
   }
 }
 
