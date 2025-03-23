@@ -24,7 +24,7 @@ resource "azurerm_cdn_frontdoor_custom_domain_association" "frontdoor_cdn_custom
 # ================================
 module "cocktails_cdn_dns_sub_domain_record" {
   source                          = "../dns-sub-domain-record"
-  custom_domain_verification_id   = lower(azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain[0].validation_token)
+  custom_domain_verification_id   = azurerm_cdn_frontdoor_custom_domain.frontdoor_cdn_custom_domain[0].validation_token
   custom_domain_verification_name = "_dnsauth.${var.custom_domain.sub_domain}"
   sub_domain                      = var.custom_domain.sub_domain
   record_fqdn                     = azurerm_cdn_frontdoor_endpoint.frontdoor_cdn_endpoint.host_name

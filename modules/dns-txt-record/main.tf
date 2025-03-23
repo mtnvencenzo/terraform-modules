@@ -7,6 +7,6 @@ resource "azurerm_dns_txt_record" "dns_txt_record" {
   tags = var.tags
 
   record {
-    value = var.value
+    value = lower(var.value)
   }
 }
