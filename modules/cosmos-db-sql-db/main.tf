@@ -35,7 +35,7 @@ resource "azurerm_cosmosdb_sql_container" "sql_containers" {
   database_name         = var.database_name
   partition_key_paths   = each.value.partition_key_paths
   partition_key_version = each.value.partition_key_version == null ? 1 : each.value.partition_key_version
-  throughput            = each.value.throughput == null ? 400 : each.value.throughput
+  throughput            = each.value.throughput == null ? null : each.value.throughput
 
   indexing_policy {
     indexing_mode = each.value.indexing_mode == null ? "consistent" : each.value.indexing_mode
