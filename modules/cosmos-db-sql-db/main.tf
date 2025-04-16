@@ -45,9 +45,9 @@ resource "azurerm_cosmosdb_sql_container" "sql_containers" {
     }
   }
 
-  unique_key {
-    paths = each.value.unique_key_paths
-  }
+  # unique_key {
+  #   paths = each.value.unique_key_paths
+  # }
   
   depends_on = [azurerm_cosmosdb_sql_database.sql_db]
 }
