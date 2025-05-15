@@ -22,6 +22,8 @@ resource "azurerm_api_management_api" "apim_api_version" {
     version_set_id = azurerm_api_management_api_version_set.apim_api_version_set.id
     version_description = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)} v${var.api.version}"
 
+    subscription_required = false
+
     subscription_key_parameter_names {
       header  = "X-Key"
       query   = "x-key"
