@@ -25,7 +25,6 @@ variable "api" {
     version       = number
     service_fqdn  = string
     ingress_fqdn  = string
-    audience      = string
   })
 }
 
