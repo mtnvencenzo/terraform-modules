@@ -45,10 +45,6 @@ resource "azurerm_cosmosdb_sql_container" "sql_containers" {
     }
   }
 
-  unique_key {
-    paths = each.value.unique_key_paths
-  }
-
   dynamic "unique_key" {
     for_each = each.value.unique_key_paths != null && length(each.value.unique_key_paths) > 0 ? [each.value.unique_key_paths] : []
     content {
