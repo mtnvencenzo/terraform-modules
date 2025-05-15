@@ -11,10 +11,6 @@ variable "name_discriminator" {
   type    = string
 }
 
-variable "tenant_id" {
-  type = string
-}
-
 variable "apim_instance" {
   type = object({
     id                  = string
@@ -33,49 +29,12 @@ variable "api" {
   })
 }
 
-variable "keyvault_apimhostkey_secret_id" {
-  type = string
-}
-
-variable "key_vault" {
-  type = object({
-    id = string,
-    name = string
-  })
-}
 
 variable "application_insights" {
   type = object({
     id                  = string
     instrumentation_key = string
   })
-}
-
-variable "b2c_auth" {
-  type = object({
-    tenant_name   = string
-    signin_policy = string
-    tenant_id     = string
-  })
-  default = {
-    tenant_name   = ""
-    signin_policy = ""
-    tenant_id     = ""
-  }
-}
-
-variable "allowed_origins" {
-  type = list(string)
-  default = []
-}
-
-variable "subscriptions" {
-  type = list(object({
-    name          = string
-    primary_key   = string
-    secondary_key = string
-  }))
-  default = []
 }
 
 variable "operations" {
