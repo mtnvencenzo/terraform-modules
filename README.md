@@ -1,81 +1,151 @@
+# Azure Terraform Modules
 
-# Environment Setup
-- Install Visual Studio
-- Install VS Code
-- Install Chocolatey
-    - https://chocolatey.org/install
-- Install Terraform
-    - choco install terraform
-- Install Git
-    - Make sure core.autocrlf-true
-- Set Git Config
-``` shell
-    $ git config --global user.name "John Doe"
-    $ git config --global user.email "johndoe@mailinator.com"
+A comprehensive collection of reusable Terraform modules for Azure cloud infrastructure deployment. This repository contains modular, production-ready infrastructure components that follow Azure best practices and security standards.
+
+## 🚀 Overview
+
+This repository provides a set of Terraform modules for deploying and managing Azure resources in a consistent, secure, and maintainable way. The modules are designed to be reusable, configurable, and follow infrastructure-as-code best practices.
+
+## 🛠️ Setup
+
+To get started with these Terraform modules, you'll need to:
+
+1. Install [Terraform](https://www.terraform.io/downloads.html) (>= 1.0.0)
+2. Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+3. Configure your Azure credentials
+4. Clone this repository
+
+For detailed information about using Terraform with these modules, including common commands and best practices, see our [Terraform Commands Guide](.readme/terraform-commands.md).
+
+## 🏗️ Available Modules
+
+### API Management
+- `apim-api` - Azure API Management API configuration
+- `apim-simple-api` - Simplified API Management setup
+
+### Compute & Containers
+- `container-app` - Azure Container Apps deployment
+- `container-app-custom-domain` - Custom domain configuration for Container Apps
+
+### Databases
+- `cosmos-db-account` - Cosmos DB account setup
+- `cosmos-db-sql-db` - Cosmos DB SQL database configuration
+- `postgresql-flex-server` - PostgreSQL Flexible Server deployment
+
+### Messaging & Event Processing
+- `eventhub-namespace` - Event Hub Namespace configuration
+- `servicebus-namespace` - Service Bus Namespace setup
+- `servicebus-queue` - Service Bus Queue configuration
+- `servicebus-topic` - Service Bus Topic setup
+- `servicebus-subscription` - Service Bus Subscription configuration
+- `servicebus-subscription-rule` - Service Bus Subscription Rules
+
+### Storage
+- `storage-account` - Azure Storage Account configuration
+- `storage-container` - Storage Container setup
+
+### Networking & CDN
+- `frontdoor-cdn-endpoint-with-origin` - Azure Front Door CDN configuration
+- `dns-apex-domain-record` - DNS Apex Domain Record setup
+- `dns-mx-record` - DNS MX Record configuration
+- `dns-sub-domain-record` - DNS Subdomain Record setup
+- `dns-txt-record` - DNS TXT Record configuration
+
+### Security & Monitoring
+- `key-vault` - Azure Key Vault setup
+- `appinsights-availability-test` - Application Insights availability testing
+
+### Communication Services
+- `communication-service` - Azure Communication Services setup
+- `email-communication-service` - Email Communication Service configuration
+
+## 🛠️ Technologies Used
+
+- **Terraform** - Infrastructure as Code (IaC) tool
+- **Azure Cloud Services**:
+  - Azure API Management
+  - Azure Container Apps
+  - Azure Cosmos DB
+  - Azure Event Hub
+  - Azure Service Bus
+  - Azure Storage
+  - Azure Front Door
+  - Azure Key Vault
+  - Azure Application Insights
+  - Azure Communication Services
+  - Azure DNS
+  - Azure PostgreSQL Flexible Server
+
+## 🔒 Security Features
+
+- TLS 1.2 enforcement
+- Private endpoints where applicable
+- Network security rules
+- Role-based access control (RBAC)
+- Key Vault integration
+- Secure secret management
+
+## 🚦 Prerequisites
+
+- Terraform >= 1.0.0
+- Azure CLI
+- Azure subscription
+- Appropriate Azure permissions
+
+## 📦 Usage
+
+Each module can be used independently. Here's a basic example of how to use a module:
+
+```hcl
+module "storage_account" {
+  source = "git::ssh://git@github.com/mtnvencenzo/Terraform-Modules.git//modules/storage-account"
+
+  resource_group_name = "my-resource-group"
+  location           = "eastus"
+  environment        = "prod"
+  domain            = "myapp"
+  name_discriminator = "storage"
+}
 ```
-- Install nvm (https://github.com/nvm-sh/nvm#install--update-script)
-    - Create ``.bash_profile`` file in your home directory (Typcally `C:\Users\YourUserName`)
-    - Open Git Bash and run this line: 
-        - `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash`
-            - If you see an error about bash being not recognized, you may need to add `C:\Program Files\Git\bin` (or whatever your path is) to your emvironment variables.
-        - Once install is complete run this line to start using nvm
 
-        -   >export NVM_DIR="$HOME/.nvm"
-            >[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-            >[ -s "$NVM_DIR/bash_completion.sh" ] && \. "$NVM_DIR/bash_completion.sh"
+### GitHub Workflow Access
 
-        - Verify that nvm is installed by running this command:
-            - `nvm -v`
-        - Install Node
-            - Open Git Bash and run: `nvm install node # "node is an alias for the latest version"`
-        - Verify Installation: `node -v`
-        - Setup SSH key for Git (optional)
-            - https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops
-        - Docker
-            - Make sure virtualization is enabled
-                - Task manager > Performance tab > You should see 'Virtualization: Enabled'
-            - Install WSL
-                - Open PowerShell or Windows Command Prompt in administrator mode and run: `wsl --install` (https://learn.microsoft.com/en-us/windows/wsl/install)
-                - Open windows features and enable:
-                    - Virtual Machine Platform
-                    - Windows Hypervisor Platform
-                    - Windows Subsystem for Linux
-                - From PowerShell enable WSL-1 by running the following command:
-                    - `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
-                - Download the Linux Kernel installer from MS (https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4--download-the-linux-kernel-update-package)
-                - Run the Linux Kernel Installer
-                - From PowerShell set WSL version to 2:
-                    - `wsl --set-default-version 2`
-            - Download and run docker desktop for windows (https://docs.docker.com/desktop/install/windows-install/)
-            - Add docker-user to your non-admin login (only needed if having a separate admin account to install stuff)
-                - Open in PowerShell as admin
-                - Run this command:
-                    - `net localgroup docker-users "domain\YourUserName" /ADD`
-                - Restart your computer.
-            - If any UIs need to access Devops Artifacts for internal npm packages you need to setup `vsts-npm-auth`
-                -   > npm install -g vsts-npm-auth
-                    > vsts-npm-auth -config .npmrc
-                - Login prompt should open up and you should login with your credentials.
-            - Install Yarn:
-                - `npm install -g yarn`
-            - Install Azure CLI
-                - Can be done by command line or via an installer.
-                    - Installer can be found on the Azure CLI website: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
-                - Alternately, Open PowerShell as an Admin and run this:
-                    - `$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi`
-            - Install Azure Functions Core Tools
-                - `choco install azure-functions-core-tools -y`
-				- After install open Visual Studio and navigate to the Tools > Options > Projects and Solutions > Azure Functions option and click 'Check for updates'
+To access these modules from a GitHub workflow, you'll need to set up SSH authentication. Here's an example workflow configuration:
 
-- Git Bash Integration in Visual Studio
-  - Add Git Bash to Visual Studio Terminal
-    - Open the Tools > Options > Environment > Terminal Menu option and add a new terminal pointing to the git sh.exe cli
-      ![Adding](./.readme-assets/adding-git-bash-to-visualstudio-terminal.png)
-    - Then select the View > Terminal menu and pick your new Git Bash terminal.
-      ![Adding](./.readme-assets/using-git-bash-in-visualstudio-terminal.png)
+```yaml
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add ssh key to ssh-agent
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.terraform_module_repo_access_key_secret }}
 
-  - Add Git Bash to Visual Studio External Tools
-    - Open the Tools > External Tools Menu option and add a new terminal pointing to the git git-bash.exe cli
-      ![Adding](./.readme-assets/adding-git-bash-to-visualstudio-external-tools.png)
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "1.0.0"
 
+      - name: Terraform Init
+        run: terraform init
+```
+
+Make sure to:
+1. Add your SSH private key as a repository secret named `terraform_module_repo_access_key_secret`.  This should match the corresponding public key in the repository.
+2. Ensure the workflow has the necessary permissions to access the secrets
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## ⚠️ Disclaimer
+
+These modules are provided as-is, without warranty of any kind. Always review the configuration before deploying to production environments.
