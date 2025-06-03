@@ -15,6 +15,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
       }
     }
 
+    ip_range_filter = toset(var.ip_range_filter)
+
     consistency_policy {
       consistency_level = var.consistency_level
       max_interval_in_seconds = var.max_interval_in_seconds

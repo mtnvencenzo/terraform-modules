@@ -68,3 +68,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "ip_range_filter" {
+  type = list(string)
+  default = []
+}
