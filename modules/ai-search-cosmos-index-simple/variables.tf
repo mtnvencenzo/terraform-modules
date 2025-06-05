@@ -18,11 +18,6 @@ variable "tags" {
   default = {}
 }
 
-variable "domain" {
-  type        = string
-  description = "The domain of the Cosmos DB account"
-}
-
 variable "cosmos_datasource_json" {
   type = string
 }
