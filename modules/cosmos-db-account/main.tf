@@ -69,9 +69,9 @@ resource "azurerm_cosmosdb_sql_role_assignment" "sql_account_reader_role_assignm
   name                = each.value.name
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
-  role_definition_id  = each.value.role_definition_id
+  role_definition_id  = azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_reader_role_definition.id
   principal_id        = each.value.principal_id
-  scope               = azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_reader_role_definition.id
+  scope               = azurerm_cosmosdb_account.cosmosdb_account.id
 
   depends_on = [azurerm_cosmosdb_account.cosmosdb_account, azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_reader_role_definition]
 }
@@ -102,9 +102,9 @@ resource "azurerm_cosmosdb_sql_role_assignment" "sql_account_contributor_role_as
   name                = each.value.name
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
-  role_definition_id  = each.value.role_definition_id
+  role_definition_id  = azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_contributor_role_definition.id
   principal_id        = each.value.principal_id
-  scope               = azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_contributor_role_definition.id
+  scope               = azurerm_cosmosdb_account.cosmosdb_account.id
 
   depends_on = [azurerm_cosmosdb_account.cosmosdb_account, azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_contributor_role_definition]
 }
