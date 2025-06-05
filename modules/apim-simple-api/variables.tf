@@ -8,7 +8,7 @@ variable "domain" {
 }
 
 variable "name_discriminator" {
-  type    = string
+  type = string
 }
 
 variable "apim_instance" {
@@ -22,9 +22,9 @@ variable "apim_instance" {
 
 variable "api" {
   type = object({
-    version       = number
-    service_fqdn  = string
-    ingress_fqdn  = string
+    version      = number
+    service_fqdn = string
+    ingress_fqdn = string
   })
 }
 

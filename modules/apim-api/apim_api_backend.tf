@@ -17,7 +17,7 @@ resource "azurerm_api_management_backend" "apim_api_backend" {
   api_management_name = var.apim_instance.name
   protocol            = "http"
   url                 = "https://${var.api.ingress_fqdn}/${var.name_discriminator}/v${var.api.version}"
-  
+
   credentials {
     header = {
       "X-Apim-Host-Key" = "{{${azurerm_api_management_named_value.apim_api_backend_named_value_apimhostkey.name}}}"

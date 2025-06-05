@@ -1,6 +1,6 @@
 resource "azurerm_container_app_custom_domain" "container_app_custom_domain" {
-  name                = var.name
-  container_app_id    = var.container_app_id
+  name             = var.name
+  container_app_id = var.container_app_id
 
   lifecycle {
 

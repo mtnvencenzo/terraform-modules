@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -46,7 +46,7 @@ variable "support_ordering" {
 }
 
 variable "name_discriminator" {
-  type    = string
+  type = string
 }
 
 variable "duplicate_detection_history_time_window" {

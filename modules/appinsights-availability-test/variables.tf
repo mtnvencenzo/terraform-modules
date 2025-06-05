@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -40,7 +40,7 @@ variable "application_insights_id" {
 }
 
 variable "geo_locations" {
-  type = list(string)
+  type    = list(string)
   default = ["us-fl-mia-edge", "us-va-ash-azr", "us-ca-sjc-azr", "us-il-ch1-azr", "us-tx-sn1-azr"]
 }
 
@@ -59,37 +59,37 @@ variable "description" {
 }
 
 variable "retry_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "expected_status_code" {
-  type = number
+  type    = number
   default = 200
 }
 
 variable "ssl_check_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "ssl_cert_remaining_lifetime" {
-  type = number
+  type    = number
   default = 3
 }
 
 variable "follow_redirects_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "parse_dependent_requests_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -98,7 +98,7 @@ variable "http_url" {
 }
 
 variable "http_method" {
-  type = string
+  type    = string
   default = "GET"
 }
 
@@ -111,22 +111,22 @@ variable "alert_description" {
 }
 
 variable "alert_auto_mitigate" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "alert_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "alert_frequency" {
-  type = string
+  type    = string
   default = "PT30M"
 }
 
 variable "alert_window_size" {
-  type = string
+  type    = string
   default = "PT1H"
 }
 
@@ -135,22 +135,22 @@ variable "alert_action_group_id" {
 }
 
 variable "alert_failed_location_count" {
-  type = number
+  type    = number
   default = 2
 }
 
 variable "alert_severity" {
-  type = number
+  type    = number
   default = 0
 }
 
 variable "create_alert" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "headers" {
-  type = list(object({name = string, value = string}))
+  type = list(object({ name = string, value = string }))
 }
 
 variable "tags" {

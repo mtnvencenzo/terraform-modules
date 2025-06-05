@@ -6,7 +6,7 @@ variable "dns_zone" {
 }
 
 variable "ttl" {
-  type = number
+  type    = number
   default = 300
 }
 

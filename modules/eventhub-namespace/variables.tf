@@ -5,7 +5,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 

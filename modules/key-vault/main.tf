@@ -1,6 +1,6 @@
 resource "azurerm_key_vault" "keyvault" {
   name = "kv-${var.sub}-${var.region}-${var.environment}-${var.shortdomain}-${var.sequence}"
-  
+
   resource_group_name             = var.resource_group_name
   location                        = var.resource_group_location
   tenant_id                       = var.tenant_id
@@ -12,14 +12,14 @@ resource "azurerm_key_vault" "keyvault" {
   sku_name                        = "standard"
 
   tags = merge({
-      Environment = var.environment
-      Application = var.domain
+    Environment = var.environment
+    Application = var.domain
   }, var.tags)
 
   network_acls {
-    bypass                      = "AzureServices"
-    default_action              = "Allow"
-    virtual_network_subnet_ids  = var.virtual_network_subnet_ids
+    bypass                     = "AzureServices"
+    default_action             = "Allow"
+    virtual_network_subnet_ids = var.virtual_network_subnet_ids
   }
 
   lifecycle {
@@ -29,33 +29,33 @@ resource "azurerm_key_vault" "keyvault" {
 
 
 resource "azurerm_key_vault_access_policy" "keyvault_pipeline_access_policy" {
-    key_vault_id        = azurerm_key_vault.keyvault.id
-    tenant_id           = var.tenant_id
-    object_id           = var.pipeline_object_id
-    key_permissions     = [ "Get", "List", "Update", "Create", "Delete", "Recover", "Backup", "Restore" ]
-    secret_permissions  = [ "Get", "List", "Set", "Delete", "Recover", "Backup", "Restore" ]
+  key_vault_id       = azurerm_key_vault.keyvault.id
+  tenant_id          = var.tenant_id
+  object_id          = var.pipeline_object_id
+  key_permissions    = ["Get", "List", "Update", "Create", "Delete", "Recover", "Backup", "Restore"]
+  secret_permissions = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore"]
 
-    depends_on = [
-      azurerm_key_vault.keyvault
-    ]
+  depends_on = [
+    azurerm_key_vault.keyvault
+  ]
 }
 
 resource "azurerm_key_vault_secret" "keyvault_secrets" {
   for_each = tomap({
     for secret in var.secrets :
-      secret.name => secret
+    secret.name => secret
   })
 
   tags = merge({
-      Environment = var.environment
-      Application = var.domain
+    Environment = var.environment
+    Application = var.domain
   }, var.tags)
 
-  name = each.value.name
-  value = each.value.value
+  name         = each.value.name
+  value        = each.value.value
   key_vault_id = azurerm_key_vault.keyvault.id
 
-  depends_on = [ 
+  depends_on = [
     azurerm_key_vault.keyvault,
     azurerm_key_vault_access_policy.keyvault_pipeline_access_policy
   ]
@@ -64,25 +64,25 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
 resource "azurerm_key_vault_secret" "keyvault_secrets_ignored" {
   for_each = tomap({
     for secret in var.secrets_values_ignored :
-      secret.name => secret
+    secret.name => secret
   })
 
   tags = merge({
-      Environment = var.environment
-      Application = var.domain
+    Environment = var.environment
+    Application = var.domain
   }, var.tags)
 
-  name = each.value.name
-  value = each.value.value
+  name         = each.value.name
+  value        = each.value.value
   key_vault_id = azurerm_key_vault.keyvault.id
 
-  depends_on = [ 
+  depends_on = [
     azurerm_key_vault.keyvault,
     azurerm_key_vault_access_policy.keyvault_pipeline_access_policy
   ]
 
   lifecycle {
-    ignore_changes = [ value ]
+    ignore_changes = [value]
   }
 }
 

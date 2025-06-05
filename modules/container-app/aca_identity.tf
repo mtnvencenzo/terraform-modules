@@ -4,8 +4,8 @@ resource "azurerm_user_assigned_identity" "aca_user_identity" {
   location            = var.resource_group_location
 
   tags = merge({
-      Environment = var.environment
-      Application = var.domain
+    Environment = var.environment
+    Application = var.domain
   }, var.tags)
 }
 

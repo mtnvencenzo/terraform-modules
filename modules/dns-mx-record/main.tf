@@ -3,14 +3,14 @@ resource "azurerm_dns_mx_record" "dns_mx_record" {
   zone_name           = var.dns_zone.name
   resource_group_name = var.dns_zone.resource_group_name
   ttl                 = var.ttl
-  tags = var.tags
+  tags                = var.tags
 
   dynamic "record" {
     for_each = toset(var.record_exchanges)
 
     content {
-      preference  = record.value["preference"]
-      exchange    = record.value["exchange"]
+      preference = record.value["preference"]
+      exchange   = record.value["exchange"]
     }
   }
 }

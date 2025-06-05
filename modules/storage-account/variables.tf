@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -18,13 +18,13 @@ variable "domain" {
 }
 
 variable "name_discriminator" {
-  type    = string
+  type = string
 }
 
 variable "short_sequence" {
-  type    = string
+  type        = string
   description = "The sequence number of the resource typically starting with 001"
-  default = "1"
+  default     = "1"
 }
 
 variable "resource_group_name" {
@@ -41,8 +41,8 @@ variable "allowed_origins" {
 
 variable "blob_containers" {
   type = list(object({
-     name                   = string
-     container_access_type  = optional(string, "private")
+    name                  = string
+    container_access_type = optional(string, "private")
   }))
   default = []
 }

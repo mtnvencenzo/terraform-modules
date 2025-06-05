@@ -1,7 +1,7 @@
 variable "subscription_id" {
-  type    = string
+  type = string
 }
 
 variable "correlation_filter_label" {
-  type    = string
+  type = string
 }

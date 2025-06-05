@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -32,15 +32,15 @@ variable "location" {
 }
 
 variable "topic_id" {
-  type    = string
+  type = string
 }
 
 variable "name_discriminator" {
-  type    = string
+  type = string
 }
 
 variable "forward_to" {
-  type    = string
+  type = string
 }
 
 variable "max_delivery_count" {

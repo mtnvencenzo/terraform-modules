@@ -6,7 +6,7 @@ variable "dns_zone" {
 }
 
 variable "ttl" {
-  type = number
+  type    = number
   default = 300
 }
 
@@ -17,14 +17,14 @@ variable "spf_include_domain" {
 variable "dkim_record" {
   type = object({
     name  = string
-    value = string 
+    value = string
   })
 }
 
 variable "record_exchanges" {
   type = list(object({
     preference = number
-    exchange = string
+    exchange   = string
   }))
 }
 

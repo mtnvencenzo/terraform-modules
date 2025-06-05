@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -27,8 +27,8 @@ variable "resource_group_name" {
 }
 
 variable "data_location" {
-  type      = string
-  default   = "United States"
+  type    = string
+  default = "United States"
 }
 
 variable "tags" {

@@ -8,28 +8,28 @@ resource "azurerm_api_management_api_version_set" "apim_api_version_set" {
 
 
 resource "azurerm_api_management_api" "apim_api_version" {
-    name                = "${var.environment}-${var.domain}-${var.name_discriminator}-v${var.api.version}"
-    resource_group_name = var.apim_instance.resource_group_name
-    api_management_name = var.apim_instance.name
-    path                = "${var.environment}/${var.domain}/${var.name_discriminator}"
-    revision            = "v${var.api.version}"
-    display_name        = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)}"
-    protocols           = ["https"]
-    service_url         = "https://${var.api.service_fqdn}/${var.name_discriminator}/v${var.api.version}"
-    api_type            = "http"
+  name                = "${var.environment}-${var.domain}-${var.name_discriminator}-v${var.api.version}"
+  resource_group_name = var.apim_instance.resource_group_name
+  api_management_name = var.apim_instance.name
+  path                = "${var.environment}/${var.domain}/${var.name_discriminator}"
+  revision            = "v${var.api.version}"
+  display_name        = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)}"
+  protocols           = ["https"]
+  service_url         = "https://${var.api.service_fqdn}/${var.name_discriminator}/v${var.api.version}"
+  api_type            = "http"
 
-    version = "v${var.api.version}"
-    version_set_id = azurerm_api_management_api_version_set.apim_api_version_set.id
-    version_description = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)} v${var.api.version}"
+  version             = "v${var.api.version}"
+  version_set_id      = azurerm_api_management_api_version_set.apim_api_version_set.id
+  version_description = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)} v${var.api.version}"
 
-    subscription_key_parameter_names {
-      header  = "X-Key"
-      query   = "x-key"
-    }
+  subscription_key_parameter_names {
+    header = "X-Key"
+    query  = "x-key"
+  }
 
-    depends_on = [
-      azurerm_api_management_api_version_set.apim_api_version_set
-    ]
+  depends_on = [
+    azurerm_api_management_api_version_set.apim_api_version_set
+  ]
 }
 
 
@@ -41,7 +41,7 @@ resource "azurerm_api_management_policy_fragment" "apim_api_cors_policy_fragment
       <fragment>
         <cors allow-credentials="true">
           <allowed-origins>
-            ${ join("\n", local.apim_allowed_origins) }
+            ${join("\n", local.apim_allowed_origins)}
           </allowed-origins>
           <allowed-methods>
             <method>*</method>
@@ -74,12 +74,12 @@ resource "azurerm_api_management_policy_fragment" "apim_api_b2c_policy_fragment"
 }
 
 resource "azurerm_api_management_api_diagnostic" "apim_api_diagnostic" {
-  count                     = var.application_insights != null ? 1 : 0
-  identifier                = "applicationinsights"
-  api_name                  = azurerm_api_management_api.apim_api_version.name
-  resource_group_name       = var.apim_instance.resource_group_name
-  api_management_name       = var.apim_instance.name
-  api_management_logger_id  = azurerm_api_management_logger.apim_appinsights_logger.id
+  count                    = var.application_insights != null ? 1 : 0
+  identifier               = "applicationinsights"
+  api_name                 = azurerm_api_management_api.apim_api_version.name
+  resource_group_name      = var.apim_instance.resource_group_name
+  api_management_name      = var.apim_instance.name
+  api_management_logger_id = azurerm_api_management_logger.apim_appinsights_logger.id
 
   sampling_percentage       = 5.0
   always_log_errors         = true
@@ -106,7 +106,7 @@ resource "azurerm_api_management_api_diagnostic" "apim_api_diagnostic" {
     ]
   }
 
-  depends_on = [ 
+  depends_on = [
     azurerm_api_management_logger.apim_appinsights_logger
   ]
 }

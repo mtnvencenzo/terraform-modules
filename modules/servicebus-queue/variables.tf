@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -36,7 +36,7 @@ variable "namespace_id" {
 }
 
 variable "name_discriminator" {
-  type    = string
+  type = string
 }
 
 variable "lock_duration" {

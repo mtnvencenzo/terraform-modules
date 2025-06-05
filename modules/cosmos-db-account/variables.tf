@@ -5,7 +5,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -70,6 +70,22 @@ variable "tags" {
 }
 
 variable "ip_range_filter" {
-  type = list(string)
+  type    = list(string)
+  default = []
+}
+
+variable "account_reader_role_assignments" {
+  type = list(object({
+    name         = string
+    principal_id = string
+  }))
+  default = []
+}
+
+variable "account_contributor_role_assignments" {
+  type = list(object({
+    name         = string
+    principal_id = string
+  }))
   default = []
 }

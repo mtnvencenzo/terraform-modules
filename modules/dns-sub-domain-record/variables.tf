@@ -6,7 +6,7 @@ variable "dns_zone" {
 }
 
 variable "ttl" {
-  type = number
+  type    = number
   default = 300
 }
 
@@ -23,7 +23,7 @@ variable "record_fqdn" {
 }
 
 variable "custom_domain_verification_name" {
-  type = string
+  type    = string
   default = null
 }
 

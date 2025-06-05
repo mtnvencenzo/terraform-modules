@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -32,8 +32,8 @@ variable "location" {
 }
 
 variable "subnet_ids" {
-  type = list(string)
-  default = [ ]
+  type    = list(string)
+  default = []
 }
 
 variable "local_auth_enabled" {

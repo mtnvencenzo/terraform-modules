@@ -13,8 +13,8 @@ variable "container_access_type" {
 
 variable "role_assignments" {
   type = list(object({
-    role_definition_name  = string
-    principal_id          = string
+    role_definition_name = string
+    principal_id         = string
   }))
   default = []
 }

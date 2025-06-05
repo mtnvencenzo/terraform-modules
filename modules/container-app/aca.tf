@@ -1,21 +1,21 @@
 resource "azurerm_container_app" "aca" {
-  name                            = "aca-${var.sub}-${var.region}-${var.environment}-${var.domain}${var.name_discriminator}-${var.sequence}"
-  resource_group_name             = var.resource_group_name
-  container_app_environment_id    = var.container_app_environment_id
-  revision_mode                   = var.revision_mode
-  workload_profile_name           = var.workload_profile_name
-  max_inactive_revisions          = var.max_inactive_revisions
+  name                         = "aca-${var.sub}-${var.region}-${var.environment}-${var.domain}${var.name_discriminator}-${var.sequence}"
+  resource_group_name          = var.resource_group_name
+  container_app_environment_id = var.container_app_environment_id
+  revision_mode                = var.revision_mode
+  workload_profile_name        = var.workload_profile_name
+  max_inactive_revisions       = var.max_inactive_revisions
 
   tags = merge({
-      Environment = var.environment
-      Application = var.domain
+    Environment = var.environment
+    Application = var.domain
   }, var.tags)
 
   ingress {
     allow_insecure_connections = var.ingress_allow_insecure_connections
     external_enabled           = var.ingress_external_enabled
     target_port                = var.ingress_target_port
-    
+
     dynamic "traffic_weight" {
       for_each = toset(var.ingress_traffic_weights)
 
@@ -45,13 +45,13 @@ resource "azurerm_container_app" "aca" {
       key_vault_secret_id = "https://${var.key_vault.name}.vault.azure.net/secrets/${secret.value["key_vault_secret_name"]}"
     }
   }
-  
+
   dynamic "dapr" {
     for_each = var.dapr != null ? [0] : []
 
     content {
-      app_id = var.dapr.app_id
-      app_port = var.ingress_target_port
+      app_id       = var.dapr.app_id
+      app_port     = var.ingress_target_port
       app_protocol = var.dapr.app_protocol != null ? var.dapr.app_protocol : "http"
     }
   }
@@ -70,7 +70,7 @@ resource "azurerm_container_app" "aca" {
         transport = "HTTP"
         port      = var.ingress_target_port
         path      = "${var.startup_probe_relative_url}?type=startup_probe"
-        timeout = 10
+        timeout   = 10
       }
 
       # -------------------------------------------------------------------------------------------------
@@ -86,8 +86,8 @@ resource "azurerm_container_app" "aca" {
         for_each = toset(var.env_vars)
 
         content {
-          name    = env.value["name"]
-          value   = env.value["value"]
+          name  = env.value["name"]
+          value = env.value["value"]
         }
       }
 
@@ -95,8 +95,8 @@ resource "azurerm_container_app" "aca" {
         for_each = toset(var.env_secret_vars)
 
         content {
-          name          = env.value["name"]
-          secret_name   = env.value["secret_name"]
+          name        = env.value["name"]
+          secret_name = env.value["secret_name"]
         }
       }
     }

@@ -4,7 +4,7 @@ variable "sub" {
 }
 
 variable "region" {
-  type	= string
+  type    = string
   default = "eus"
 }
 
@@ -22,9 +22,9 @@ variable "shortdomain" {
 }
 
 variable "sequence" {
-  type    = string
+  type        = string
   description = "The sequence number of the resource typically starting with 001"
-  default = "001"
+  default     = "001"
 }
 
 variable "tenant_id" {
@@ -49,16 +49,16 @@ variable "virtual_network_subnet_ids" {
 
 variable "secrets" {
   type = list(object({
-     name = string,
-     value = string
+    name  = string,
+    value = string
   }))
   default = []
 }
 
 variable "secrets_values_ignored" {
   type = list(object({
-     name = string,
-     value = string
+    name  = string,
+    value = string
   }))
   default = []
 }

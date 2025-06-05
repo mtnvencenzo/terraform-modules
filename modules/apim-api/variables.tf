@@ -8,7 +8,7 @@ variable "domain" {
 }
 
 variable "name_discriminator" {
-  type    = string
+  type = string
 }
 
 variable "tenant_id" {
@@ -26,10 +26,10 @@ variable "apim_instance" {
 
 variable "api" {
   type = object({
-    version       = number
-    service_fqdn  = string
-    ingress_fqdn  = string
-    audience      = string
+    version      = number
+    service_fqdn = string
+    ingress_fqdn = string
+    audience     = string
   })
 }
 
@@ -39,7 +39,7 @@ variable "keyvault_apimhostkey_secret_id" {
 
 variable "key_vault" {
   type = object({
-    id = string,
+    id   = string,
     name = string
   })
 }
@@ -65,7 +65,7 @@ variable "b2c_auth" {
 }
 
 variable "allowed_origins" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 
