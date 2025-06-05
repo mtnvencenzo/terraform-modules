@@ -2,7 +2,7 @@
 resource "restapi_object" "cosmos_datasource" {
   path         = "/datasources"
   query_string = "api-version=2024-07-01"
-  data         = jsonencode(var.cosmos_datasource_json)
+  data         = var.cosmos_datasource_json
   id_attribute = "name" # The ID field on the response
 }
 
@@ -11,7 +11,7 @@ resource "restapi_object" "cosmos_datasource" {
 resource "restapi_object" "cosmos_standard_lucene_index" {
   path         = "/indexes"
   query_string = "api-version=2024-07-01"
-  data         = jsonencode(var.cosmos_standard_lucene_index_json)
+  data         = var.cosmos_standard_lucene_index_json
   id_attribute = "name" # The ID field on the response
   depends_on   = [restapi_object.cosmos_datasource]
 }
@@ -20,7 +20,7 @@ resource "restapi_object" "cosmos_standard_lucene_index" {
 resource "restapi_object" "cosmos_standard_lucene_indexer" {
   path         = "/indexers"
   query_string = "api-version=2024-07-01"
-  data         = jsonencode(var.cosmos_standard_lucene_indexer_json)
+  data         = var.cosmos_standard_lucene_indexer_json
   id_attribute = "name" # The ID field on the response
   depends_on   = [restapi_object.cosmos_datasource, restapi_object.cosmos_standard_lucene_index]
 }
