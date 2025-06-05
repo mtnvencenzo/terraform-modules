@@ -1,13 +1,3 @@
-variable "ai_search_service_host_name" {
-  type        = string
-  description = "The host name for the AI Search service"
-}
-
-variable "ai_search_service_key" {
-  type        = string
-  description = "The primary key for the AI Search service"
-}
-
 variable "cosmosdb_account_id" {
   type        = string
   description = "The ID of the Cosmos DB account"
