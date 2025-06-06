@@ -66,7 +66,7 @@ resource "azurerm_cosmosdb_sql_role_assignment" "sql_account_reader_role_assignm
     role_assignment.name => role_assignment
   })
 
-  name                = azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_reader_role_definition.role_definition_id
+  name                = each.value.name
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
   role_definition_id  = azurerm_cosmosdb_sql_role_definition.cosmosdb_custom_reader_role_definition.id
