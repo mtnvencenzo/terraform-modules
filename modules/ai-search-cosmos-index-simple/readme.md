@@ -92,6 +92,7 @@ module "ai_search_cosmos_index" {
 - [Terraform Commands Guide](../../.readme/terraform-commands.md)
 - [Azure AI Search Documentation](https://docs.microsoft.com/en-us/azure/search/)
 - [Cosmos DB Documentation](https://docs.microsoft.com/en-us/azure/cosmos-db/)
+- [Connecting with Managed Identity to Cosmos](https://learn.microsoft.com/en-us/azure/search/search-howto-managed-identities-cosmos-db)
 
 ## ⚠️ Notes
 
