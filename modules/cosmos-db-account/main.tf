@@ -41,6 +41,17 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   }
 }
 
+resource "azurerm_role_assignment" "cosmos_search_account_reader_role_assignment" {
+  for_each = tomap({
+    for role_assignment in var.cosmos_db_account_reader_role_assignments :
+    role_assignment.principal_id => role_assignment
+  })
+
+  scope                = azurerm_cosmosdb_account.cosmosdb_account.id
+  role_definition_name = "Cosmos DB Account Reader Role"
+  principal_id         = each.key
+}
+
 
 resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_definition" {
   name                = "Cosmos DB Custom Data Reader"
@@ -60,9 +71,9 @@ resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_reader_role_def
 }
 
 
-resource "azurerm_cosmosdb_sql_role_assignment" "sql_account_reader_role_assignments" {
+resource "azurerm_cosmosdb_sql_role_assignment" "sql_custom_reader_role_assignments" {
   for_each = tomap({
-    for role_assignment in var.account_reader_role_assignments :
+    for role_assignment in var.custom_reader_role_assignments :
     role_assignment.name => role_assignment
   })
 
@@ -96,9 +107,9 @@ resource "azurerm_cosmosdb_sql_role_definition" "cosmosdb_custom_contributor_rol
   }
 }
 
-resource "azurerm_cosmosdb_sql_role_assignment" "sql_account_contributor_role_assignments" {
+resource "azurerm_cosmosdb_sql_role_assignment" "sql_custom_contributor_role_assignments" {
   for_each = tomap({
-    for role_assignment in var.account_contributor_role_assignments :
+    for role_assignment in var.custom_contributor_role_assignments :
     role_assignment.name => role_assignment
   })
 

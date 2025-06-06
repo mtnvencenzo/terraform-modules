@@ -74,7 +74,7 @@ variable "ip_range_filter" {
   default = []
 }
 
-variable "account_reader_role_assignments" {
+variable "custom_reader_role_assignments" {
   type = list(object({
     name         = string
     principal_id = string
@@ -82,9 +82,16 @@ variable "account_reader_role_assignments" {
   default = []
 }
 
-variable "account_contributor_role_assignments" {
+variable "custom_contributor_role_assignments" {
   type = list(object({
     name         = string
+    principal_id = string
+  }))
+  default = []
+}
+
+variable "cosmos_db_account_reader_role_assignments" {
+  type = list(object({
     principal_id = string
   }))
   default = []
