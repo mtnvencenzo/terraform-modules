@@ -100,3 +100,4 @@ module "ai_search_cosmos_index" {
 - Consider using managed identity for secure data source connections
 - Review index configuration for optimal search performance
 - The module uses the REST API provider to interact with Azure AI Search
+- When using the free tier of Azure AI Search, you must add IP filter rule `0.0.0.0` to allow Azure datacenter access in your Cosmos DB network settings

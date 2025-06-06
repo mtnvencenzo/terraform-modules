@@ -32,6 +32,10 @@ For detailed information about using Terraform with these modules, including com
 - `cosmos-db-sql-db` - Cosmos DB SQL database configuration
 - `postgresql-flex-server` - PostgreSQL Flexible Server deployment
 
+### AI & Search
+- `ai-search` - Azure AI Search service setup
+- `ai-search-cosmos-index-simple` - Simplified Cosmos DB index configuration for Azure AI Search
+
 ### Messaging & Event Processing
 - `eventhub-namespace` - Event Hub Namespace configuration
 - `servicebus-namespace` - Service Bus Namespace setup
