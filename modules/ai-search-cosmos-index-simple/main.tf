@@ -5,7 +5,7 @@ resource "restapi_object" "cosmos_datasource" {
   data         = var.cosmos_datasource_json
   id_attribute = "name" # The ID field on the response
 
-  ignore_fields = [
+  copy_keys = [
     "@odata.context",
     "@odata.etag"
   ]
@@ -19,7 +19,7 @@ resource "restapi_object" "cosmos_standard_lucene_index" {
   data         = var.cosmos_standard_lucene_index_json
   id_attribute = "name" # The ID field on the response
 
-  ignore_fields = [
+  copy_keys = [
     "@odata.context",
     "@odata.etag"
   ]
@@ -34,7 +34,7 @@ resource "restapi_object" "cosmos_standard_lucene_indexer" {
   data         = var.cosmos_standard_lucene_indexer_json
   id_attribute = "name" # The ID field on the response
 
-  ignore_fields = [
+  copy_keys = [
     "@odata.context",
     "@odata.etag"
   ]
