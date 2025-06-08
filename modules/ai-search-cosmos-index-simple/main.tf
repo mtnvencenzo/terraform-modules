@@ -5,11 +5,9 @@ resource "restapi_object" "cosmos_datasource" {
   data         = var.cosmos_datasource_json
   id_attribute = "name" # The ID field on the response
 
-  lifecycle {
-    ignore_changes = [
-      data
-    ]
-  }
+  ignore_changes_to = [
+    data
+  ]
 }
 
 
@@ -20,11 +18,9 @@ resource "restapi_object" "cosmos_standard_lucene_index" {
   data         = var.cosmos_standard_lucene_index_json
   id_attribute = "name" # The ID field on the response
 
-  lifecycle {
-    ignore_changes = [
-      data
-    ]
-  }
+  ignore_changes_to = [
+    data
+  ]
 
   depends_on = [restapi_object.cosmos_datasource]
 }
@@ -36,11 +32,9 @@ resource "restapi_object" "cosmos_standard_lucene_indexer" {
   data         = var.cosmos_standard_lucene_indexer_json
   id_attribute = "name" # The ID field on the response
 
-  lifecycle {
-    ignore_changes = [
-      data
-    ]
-  }
+  ignore_changes_to = [
+    data
+  ]
 
   depends_on = [restapi_object.cosmos_datasource, restapi_object.cosmos_standard_lucene_index]
 }
