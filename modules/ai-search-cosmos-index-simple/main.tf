@@ -5,6 +5,8 @@ resource "restapi_object" "cosmos_datasource" {
   data         = var.cosmos_datasource_json
   id_attribute = "name" # The ID field on the response
 
+  debug = true
+
   ignore_changes_to = [
     "data.@odata.context",
     "data.@odata.etag",
@@ -20,6 +22,8 @@ resource "restapi_object" "cosmos_standard_lucene_index" {
   query_string = "api-version=2024-07-01"
   data         = var.cosmos_standard_lucene_index_json
   id_attribute = "name" # The ID field on the response
+
+  debug = true
 
   ignore_changes_to = [
     "data.@odata.context",
@@ -37,6 +41,8 @@ resource "restapi_object" "cosmos_standard_lucene_indexer" {
   query_string = "api-version=2024-07-01"
   data         = var.cosmos_standard_lucene_indexer_json
   id_attribute = "name" # The ID field on the response
+
+  debug = true
 
   ignore_changes_to = [
     "data.@odata.context",
