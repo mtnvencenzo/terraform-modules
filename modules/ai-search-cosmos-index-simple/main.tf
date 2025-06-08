@@ -5,7 +5,10 @@ resource "restapi_object" "cosmos_datasource" {
   data         = var.cosmos_datasource_json
   id_attribute = "name" # The ID field on the response
 
-  ignore_all_server_changes = true
+  ignore_fields = [
+    "@odata.context",
+    "@odata.etag"
+  ]
 }
 
 
@@ -16,7 +19,10 @@ resource "restapi_object" "cosmos_standard_lucene_index" {
   data         = var.cosmos_standard_lucene_index_json
   id_attribute = "name" # The ID field on the response
 
-  ignore_all_server_changes = true
+  ignore_fields = [
+    "@odata.context",
+    "@odata.etag"
+  ]
 
   depends_on = [restapi_object.cosmos_datasource]
 }
@@ -28,7 +34,10 @@ resource "restapi_object" "cosmos_standard_lucene_indexer" {
   data         = var.cosmos_standard_lucene_indexer_json
   id_attribute = "name" # The ID field on the response
 
-  ignore_all_server_changes = true
+  ignore_fields = [
+    "@odata.context",
+    "@odata.etag"
+  ]
 
   depends_on = [restapi_object.cosmos_datasource, restapi_object.cosmos_standard_lucene_index]
 }
