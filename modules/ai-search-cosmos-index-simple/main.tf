@@ -30,7 +30,7 @@ resource "restapi_object" "cosmos_standard_lucene_indexer" {
 resource "azurerm_role_assignment" "search_index_reader" {
   for_each = toset(var.search_index_reader_role_assignment)
 
-  principal_id = each.value.principal_id
+  principal_id = each.value
   role_definition_name = "Search Index Data Reader"
   scope = var.azureai_account_id
 
