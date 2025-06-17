@@ -1,3 +1,8 @@
+variable "azureai_account_id" {
+  type        = string
+  description = "The ID of the Azure AI account"
+}
+
 variable "cosmosdb_account_id" {
   type        = string
   description = "The ID of the Cosmos DB account"
@@ -30,4 +35,8 @@ variable "cosmos_standard_lucene_index_json" {
   type = string
 }
 
+variable "search_index_reader_role_assignment" {
+  type = list(string)
+  default = []
+}
 
