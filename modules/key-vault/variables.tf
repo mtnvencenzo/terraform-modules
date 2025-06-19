@@ -50,7 +50,8 @@ variable "virtual_network_subnet_ids" {
 variable "secrets" {
   type = list(object({
     name  = string,
-    value = string
+    value = string,
+    tags  = optional(map(string), {})
   }))
   default = []
 }
@@ -58,7 +59,8 @@ variable "secrets" {
 variable "secrets_values_ignored" {
   type = list(object({
     name  = string,
-    value = string
+    value = string,
+    tags  = optional(map(string), {})
   }))
   default = []
 }

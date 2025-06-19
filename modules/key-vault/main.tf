@@ -49,7 +49,7 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
   tags = merge({
     Environment = var.environment
     Application = var.domain
-  }, var.tags)
+  }, each.value.tags)
 
   name         = each.value.name
   value        = each.value.value
@@ -70,7 +70,7 @@ resource "azurerm_key_vault_secret" "keyvault_secrets_ignored" {
   tags = merge({
     Environment = var.environment
     Application = var.domain
-  }, var.tags)
+  }, each.value.tags)
 
   name         = each.value.name
   value        = each.value.value
