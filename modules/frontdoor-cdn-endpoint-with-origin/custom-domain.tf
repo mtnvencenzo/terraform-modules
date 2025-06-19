@@ -1,4 +1,3 @@
-
 resource "azurerm_cdn_frontdoor_custom_domain" "frontdoor_cdn_custom_domain" {
   count                    = var.custom_domain == null ? 0 : 1
   name                     = replace(var.custom_domain.host_name, ".", "-")
@@ -7,8 +6,7 @@ resource "azurerm_cdn_frontdoor_custom_domain" "frontdoor_cdn_custom_domain" {
   host_name                = var.custom_domain.host_name
 
   tls {
-    certificate_type    = "ManagedCertificate"
-    minimum_tls_version = "TLS12"
+    certificate_type = "ManagedCertificate"
   }
 }
 
