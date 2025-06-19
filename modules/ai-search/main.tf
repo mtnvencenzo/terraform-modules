@@ -7,6 +7,10 @@ resource "azurerm_search_service" "search" {
   partition_count               = var.partition_count
   public_network_access_enabled = var.public_network_access_enabled
 
+  # When both of these are set search service will allow api key and entra auth via managed identity.
+  authentication_failure_mode  = "http403"
+  local_authentication_enabled = true
+
   identity {
     type = "SystemAssigned"
   }

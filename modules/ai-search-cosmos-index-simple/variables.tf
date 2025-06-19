@@ -36,7 +36,7 @@ variable "cosmos_standard_lucene_index_json" {
 }
 
 variable "search_index_reader_role_assignment" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 
