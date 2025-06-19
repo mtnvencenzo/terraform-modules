@@ -48,11 +48,12 @@ variable "allowed_origins" {
 }
 
 variable "caching_rule" {
-  type = optional(object({
+  type = object({
+    disabled             = optional(bool, false)
     cache_duration       = optional(string)
     ignore_query_strings = optional(bool)
     compression_enabled  = optional(bool)
-  }), null)
+  })
 }
 
 variable "tags" {
