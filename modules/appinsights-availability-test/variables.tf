@@ -104,10 +104,12 @@ variable "http_method" {
 
 variable "alert_resource_group_name" {
   type = string
+  default = ""
 }
 
 variable "alert_description" {
   type = string
+  default = ""
 }
 
 variable "alert_auto_mitigate" {
@@ -132,6 +134,7 @@ variable "alert_window_size" {
 
 variable "alert_action_group_id" {
   type = string
+  default = ""
 }
 
 variable "alert_failed_location_count" {
@@ -151,6 +154,7 @@ variable "create_alert" {
 
 variable "headers" {
   type = list(object({ name = string, value = string }))
+  default = []
 }
 
 variable "tags" {
