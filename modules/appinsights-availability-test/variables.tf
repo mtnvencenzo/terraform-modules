@@ -103,12 +103,12 @@ variable "http_method" {
 }
 
 variable "alert_resource_group_name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "alert_description" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -133,7 +133,7 @@ variable "alert_window_size" {
 }
 
 variable "alert_action_group_id" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -153,7 +153,7 @@ variable "create_alert" {
 }
 
 variable "headers" {
-  type = list(object({ name = string, value = string }))
+  type    = list(object({ name = string, value = string }))
   default = []
 }
 
