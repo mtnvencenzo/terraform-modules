@@ -1,5 +1,5 @@
 resource "azurerm_key_vault_access_policy" "apim_keyvault_policy" {
-  count              = var.key_vault != null ? 1 : 0
+  count              = var.key_vault.id != "" ? 1 : 0
   key_vault_id       = var.key_vault.id
   tenant_id          = var.tenant_id
   object_id          = var.apim_instance.principal_id

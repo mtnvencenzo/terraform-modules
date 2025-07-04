@@ -42,6 +42,10 @@ variable "key_vault" {
     id   = string,
     name = string
   })
+  default = {
+    id   = ""
+    name = ""
+  }
 }
 
 variable "application_insights" {
