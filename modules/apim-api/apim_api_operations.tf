@@ -40,11 +40,9 @@ resource "azurerm_api_management_api_operation_policy" "apim_api_version_operati
   resource_group_name = var.apim_instance.resource_group_name
   operation_id        = replace(lower("v${var.api.version}-${each.value.method}-${each.value.display_name}"), " ", "-")
 
-  xml_content = each.value.security_type == "anonymous" ? local.anonomous_operation_policy : local.b2c_auth_operation_policy
+  xml_content = each.value.policy_xml_content
 
   depends_on = [
-    azurerm_api_management_api_operation.apim_api_version_operations,
-    azurerm_api_management_policy_fragment.apim_api_cors_policy_fragment,
-    azurerm_api_management_policy_fragment.apim_api_b2c_policy_fragment
+    azurerm_api_management_api_operation.apim_api_version_operations
   ]
 }

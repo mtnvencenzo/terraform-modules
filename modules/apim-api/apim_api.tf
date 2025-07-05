@@ -6,7 +6,6 @@ resource "azurerm_api_management_api_version_set" "apim_api_version_set" {
   versioning_scheme   = "Segment"
 }
 
-
 resource "azurerm_api_management_api" "apim_api_version" {
   name                = "${var.environment}-${var.domain}-${var.name_discriminator}-v${var.api.version}"
   resource_group_name = var.apim_instance.resource_group_name
@@ -32,45 +31,17 @@ resource "azurerm_api_management_api" "apim_api_version" {
   ]
 }
 
+resource "azurerm_api_management_logger" "apim_appinsights_logger" {
+  count               = var.application_insights != null ? 1 : 0
+  name                = "${var.environment}-${var.domain}-${var.name_discriminator}-appinsights-logger"
+  description         = "${title(var.environment)} ${var.domain} ${var.name_discriminator} app insights logger for the api management instance"
+  resource_group_name = var.apim_instance.resource_group_name
+  api_management_name = var.apim_instance.name
+  resource_id         = var.application_insights.id
 
-resource "azurerm_api_management_policy_fragment" "apim_api_cors_policy_fragment" {
-  api_management_id = var.apim_instance.id
-  name              = "${var.environment}-${var.domain}-${var.name_discriminator}-cors-policy"
-  format            = "xml"
-  value             = <<XML
-      <fragment>
-        <cors allow-credentials="true">
-          <allowed-origins>
-            ${join("\n", local.apim_allowed_origins)}
-          </allowed-origins>
-          <allowed-methods>
-            <method>*</method>
-          </allowed-methods>
-          <allowed-headers>
-            <header>*</header>
-          </allowed-headers>
-        </cors>
-      </fragment>
-    XML
-}
-
-resource "azurerm_api_management_policy_fragment" "apim_api_b2c_policy_fragment" {
-  api_management_id = var.apim_instance.id
-  name              = "${var.environment}-${var.domain}-${var.name_discriminator}-b2c-policy"
-  format            = "xml"
-  value             = <<XML
-      <fragment>
-          <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid.">
-              <openid-config url="https://${var.b2c_auth.tenant_name}.b2clogin.com/${var.b2c_auth.tenant_name}.onmicrosoft.com/${var.b2c_auth.signin_policy}/v2.0/.well-known/openid-configuration" />
-              <audiences>
-                  <audience>${var.api.audience}</audience>
-              </audiences>
-              <issuers>
-                  <issuer>https://${var.b2c_auth.tenant_name}.b2clogin.com/${var.b2c_auth.tenant_id}/v2.0/</issuer>
-              </issuers>
-          </validate-jwt>
-      </fragment>
-    XML
+  application_insights {
+    instrumentation_key = var.application_insights.instrumentation_key
+  }
 }
 
 resource "azurerm_api_management_api_diagnostic" "apim_api_diagnostic" {

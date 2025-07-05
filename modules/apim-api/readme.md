@@ -42,14 +42,6 @@ module "apim_api" {
   api = {
     version     = "1"
     service_fqdn = "api.myapp.com"
-    audience    = "your-api-audience"
-  }
-
-  # B2C Authentication (required if using B2C)
-  b2c_auth = {
-    tenant_name    = "your-tenant"
-    tenant_id      = "your-tenant-id"
-    signin_policy  = "B2C_1_signupsignin"
   }
 
   # Application Insights (optional)
@@ -57,12 +49,6 @@ module "apim_api" {
     id   = "your-appinsights-id"
     name = "your-appinsights-name"
   }
-
-  # CORS configuration
-  allowed_origins = [
-    "https://myapp.com",
-    "https://dev.myapp.com"
-  ]
 
   tags = {
     Environment = "dev"
@@ -80,7 +66,6 @@ module "apim_api" {
 | domain | string | Domain name for the API |
 | name_discriminator | string | Unique identifier for the API |
 | api | object | API configuration including version and service URL |
-| b2c_auth | object | B2C authentication configuration |
 
 ## 🔧 Optional Parameters
 
@@ -102,11 +87,8 @@ module "apim_api" {
 ## 🔒 Security Features
 
 - HTTPS-only protocols
-- B2C authentication integration
-- CORS configuration
 - Custom subscription key names
 - Diagnostic logging
-- Policy-based security rules
 
 ## 🔗 Related Resources
 
