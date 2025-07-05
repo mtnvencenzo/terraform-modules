@@ -7,15 +7,16 @@ resource "azurerm_api_management_api_version_set" "apim_api_version_set" {
 }
 
 resource "azurerm_api_management_api" "apim_api_version" {
-  name                = "${var.environment}-${var.domain}-${var.name_discriminator}-v${var.api.version}"
-  resource_group_name = var.apim_instance.resource_group_name
-  api_management_name = var.apim_instance.name
-  path                = "${var.environment}/${var.domain}/${var.name_discriminator}"
-  revision            = "v${var.api.version}"
-  display_name        = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)}"
-  protocols           = ["https"]
-  service_url         = "https://${var.api.service_fqdn}/${var.name_discriminator}/v${var.api.version}"
-  api_type            = "http"
+  name                  = "${var.environment}-${var.domain}-${var.name_discriminator}-v${var.api.version}"
+  resource_group_name   = var.apim_instance.resource_group_name
+  api_management_name   = var.apim_instance.name
+  path                  = "${var.environment}/${var.domain}/${var.name_discriminator}"
+  revision              = "v${var.api.version}"
+  display_name          = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)}"
+  protocols             = ["https"]
+  service_url           = "https://${var.api.service_fqdn}/${var.name_discriminator}/v${var.api.version}"
+  api_type              = "http"
+  subscription_required = var.subscription_required
 
   version             = "v${var.api.version}"
   version_set_id      = azurerm_api_management_api_version_set.apim_api_version_set.id

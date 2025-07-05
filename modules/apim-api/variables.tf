@@ -69,3 +69,13 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "subscription_required" {
+  type    = bool
+  default = true
+}
+
+variable "backend_url_override" {
+  type    = string
+  default = null
+}
