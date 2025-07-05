@@ -13,7 +13,7 @@ resource "azurerm_api_management_product" "apim_api_product" {
 resource "azurerm_api_management_product_api" "apim_api_product_api" {
   count               = length(var.subscriptions) > 0 ? 1 : 0
   api_name            = azurerm_api_management_api.apim_api_version.name
-  product_id          = azurerm_api_management_product.apim_api_product.product_id
+  product_id          = azurerm_api_management_product.apim_api_product[0].product_id
   resource_group_name = var.apim_instance.resource_group_name
   api_management_name = var.apim_instance.name
 }
@@ -26,7 +26,7 @@ resource "azurerm_api_management_subscription" "apim_api_product_subscriptions" 
 
   resource_group_name = var.apim_instance.resource_group_name
   api_management_name = var.apim_instance.name
-  product_id          = azurerm_api_management_product.apim_api_product.id
+  product_id          = azurerm_api_management_product.apim_api_product[0].id
   display_name        = each.value.name
   state               = "active"
   subscription_id     = replace(replace(lower(each.value.name), " ", "-"), ".", "-")

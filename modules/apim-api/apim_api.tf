@@ -50,7 +50,7 @@ resource "azurerm_api_management_api_diagnostic" "apim_api_diagnostic" {
   api_name                 = azurerm_api_management_api.apim_api_version.name
   resource_group_name      = var.apim_instance.resource_group_name
   api_management_name      = var.apim_instance.name
-  api_management_logger_id = azurerm_api_management_logger.apim_appinsights_logger.id
+  api_management_logger_id = azurerm_api_management_logger.apim_appinsights_logger[0].id
 
   sampling_percentage       = 5.0
   always_log_errors         = true
