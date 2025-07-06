@@ -79,3 +79,13 @@ variable "backend_url_override" {
   type    = string
   default = null
 }
+
+variable "api_version_service_url_override" {
+  type    = string
+  default = null
+}
+
+variable "api_version_service_url_override" {
+  type    = string
+  default = null
+}
