@@ -80,7 +80,7 @@ variable "backend_url_override" {
   default = null
 }
 
-variable "api_version_service_url_override" {
+variable "service_url_override" {
   type    = string
   default = null
 }

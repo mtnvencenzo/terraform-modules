@@ -14,7 +14,7 @@ resource "azurerm_api_management_api" "apim_api_version" {
   revision              = "v${var.api.version}"
   display_name          = "${title(var.environment)} ${title(var.domain)} ${title(var.name_discriminator)}"
   protocols             = ["https"]
-  service_url           = var.api_version_service_url_override != null ? var.api_version_service_url_override : "https://${var.api.service_fqdn}/${var.name_discriminator}/v${var.api.version}"
+  service_url           = var.service_url_override != null ? var.service_url_override : "https://${var.api.service_fqdn}/${var.name_discriminator}/v${var.api.version}"
   api_type              = "http"
   subscription_required = var.subscription_required
 
