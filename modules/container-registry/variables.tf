@@ -17,10 +17,6 @@ variable "domain" {
   type = string
 }
 
-variable "name_discriminator" {
-  type = string
-}
-
 variable "sequence" {
   type    = string
   default = "001"
