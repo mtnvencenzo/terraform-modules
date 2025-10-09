@@ -7,7 +7,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   maximum_throughput_units = 4
   capacity                 = 1
 
-  network_rulesets = {
+  network_rulesets {
     default_action                 = "Deny"
     trusted_service_access_enabled = true
     virtual_network_rule = [
