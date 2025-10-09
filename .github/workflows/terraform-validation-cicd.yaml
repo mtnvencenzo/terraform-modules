@@ -1,0 +1,111 @@
+name: cicd-terraform-validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths: [modules/**/*.tf, modules/**/*.tfvars, .github/workflows/terraform-validation-cicd.yaml]
+  push:
+    branches: [main]
+    paths: [modules/**/*.tf, modules/**/*.tfvars, .github/workflows/terraform-validation-cicd.yaml]
+
+env:
+  TF_VERSION: '1.5.0'
+
+jobs:
+  terraform-validation:
+    name: Validate Terraform Modules
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: 🔍 Terraform format check
+        id: fmt
+        run: |
+          echo "::group::Terraform Format Check"
+          
+          # Run format check recursively
+          if ! terraform fmt -check -recursive -diff modules/; then
+            echo "::error::Terraform files are not properly formatted"
+            echo "Run 'terraform fmt -recursive' to fix formatting issues"
+            exit 1
+          else
+            echo "✅ All Terraform files are properly formatted"
+          fi
+
+      - name: Validate terraform modules
+        id: validate
+        run: |
+          echo "::group::Terraform Module Validation"
+          
+          # Initialize counters
+          total_modules=0
+          failed_modules=0
+          failed_module_list=""
+          
+          # Find all module directories
+          module_dirs=$(find modules -name "*.tf" -exec dirname {} \; | sort -u)
+          
+          if [ -z "$module_dirs" ]; then
+            echo "No Terraform modules found"
+            exit 0
+          fi
+          
+          echo "Found modules to validate:"
+          echo "$module_dirs" | sed 's/^/  - /'
+          echo
+          
+          # Validate each module
+          for module_dir in $module_dirs; do
+            echo "::group::Validating $module_dir"
+            total_modules=$((total_modules + 1))
+            
+            cd "$GITHUB_WORKSPACE/$module_dir"
+            
+            # Initialize the module
+            echo "Initializing $module_dir..."
+            if ! terraform init -backend=false; then
+              echo "::error::Failed to initialize $module_dir"
+              failed_modules=$((failed_modules + 1))
+              failed_module_list="$failed_module_list\n  - $module_dir (init failed)"
+              cd "$GITHUB_WORKSPACE"
+              echo "::endgroup::"
+              continue
+            fi
+            
+            # Validate the module
+            echo "Validating $module_dir..."
+            if ! terraform validate; then
+              echo "::error::Validation failed for $module_dir"
+              failed_modules=$((failed_modules + 1))
+              failed_module_list="$failed_module_list\n  - $module_dir (validation failed)"
+            else
+              echo "✅ $module_dir validation passed"
+            fi
+            
+            cd "$GITHUB_WORKSPACE"
+            echo "::endgroup::"
+          done
+          
+          echo "::endgroup::"
+          
+          # Summary
+          echo "::group::Validation Summary"
+          echo "Total modules checked: $total_modules"
+          echo "Failed modules: $failed_modules"
+          
+          if [ $failed_modules -gt 0 ]; then
+            echo "::error::Failed modules:$failed_module_list"
+            echo "Please fix the validation errors above"
+            exit 1
+          else
+            echo "✅ All modules passed validation!"
+          fi
+          
+          echo "::endgroup::"
