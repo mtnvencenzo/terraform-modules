@@ -4,7 +4,7 @@ terraform {
       source = "hashicorp/azurerm"
     }
     azapi = {
-      source  = "azure/azapi"
+      source = "azure/azapi"
     }
   }
 }
