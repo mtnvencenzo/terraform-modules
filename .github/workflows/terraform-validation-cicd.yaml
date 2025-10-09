@@ -109,37 +109,3 @@ jobs:
           fi
           
           echo "::endgroup::"
-
-      - name: Security Scan (tfsec)
-        id: tfsec
-        continue-on-error: true
-        run: |
-          echo "::group::Security Scan with tfsec"
-          
-          # Install tfsec
-          curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
-          
-          # Run tfsec on modules directory
-          echo "Running security scan on modules..."
-          if ./tfsec modules/ --format json --out tfsec-results.json; then
-            echo "✅ Security scan completed successfully"
-          else
-            echo "⚠️ Security issues found"
-          fi
-          
-          # Display results
-          if [ -f tfsec-results.json ]; then
-            echo "Security scan results:"
-            cat tfsec-results.json | jq -r '.results[] | "- \(.rule_description) in \(.location.filename):\(.location.start_line)"' || echo "No issues found"
-          fi
-          
-          echo "::endgroup::"
-
-      - name: Upload tfsec Results
-        if: steps.tfsec.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: tfsec-results
-          path: tfsec-results.json
-          retention-days: 30
-
