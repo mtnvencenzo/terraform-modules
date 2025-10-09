@@ -1,4 +1,4 @@
-name: cicd-terraform-provisioning
+name: cicd-terraform-validation
 
 on:
   pull_request:
