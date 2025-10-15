@@ -13,6 +13,7 @@ variable "database_role_assignments" {
     role_definition_id = string
     principal_id       = string
   }))
+  default = []
 }
 
 variable "resource_group_name" {
@@ -33,4 +34,5 @@ variable "containers" {
     indexing_path         = optional(string)
     unique_key_paths      = list(string)
   }))
+  default = []
 }
