@@ -99,6 +99,33 @@ module "cosmos_db_account" {
 - [Terraform Commands Guide](../../.readme/terraform-commands.md)
 - [Azure Cosmos DB Documentation](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction)
 
+## Custom Roles and Control Plane
+
+**Cosmos Control Plane Roles / Info**  
+https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/how-to-grant-control-plane-access?tabs=built-in-definition%2Ccsharp&pivots=azure-interface-cli
+
+The below commands help list the custom roles defined that are not generally viewable through the normal cli commands.  
+``` bash
+az login
+
+## List role definitions
+az cosmosdb sql role definition list --resource-group "rg-vec-eus-prd-cocktails-001" --account-name "cosmos-vec-eus-prd-cocktails-001"
+
+## Add the standard built in reader
+az cosmosdb sql role assignment create --account-name cosmos-vec-eus-prd-cocktails-001 --resource-group 'rg-vec-eus-prd-cocktails-001' --role-definition-name 'Cosmos DB Built-in Data Reader' --scope '/subscriptions/1d9ecc00-242a-460d-8b08-b71db19f094e/resourceGroups/rg-vec-eus-prd-cocktails-001/providers/Microsoft.DocumentDB/databaseAccounts/cosmos-vec-eus-prd-cocktails-001' --principal-id 'd532fa56-2a0d-4dc0-82e1-b35ca21a6709'
+
+# Add the custom data reader role
+az cosmosdb sql role assignment create --account-name cosmos-vec-eus-prd-cocktails-001 --resource-group 'rg-vec-eus-prd-cocktails-001' --role-definition-name 'Cosmos DB Custom Data Reader' --scope '/subscriptions/1d9ecc00-242a-460d-8b08-b71db19f094e/resourceGroups/rg-vec-eus-prd-cocktails-001/providers/Microsoft.DocumentDB/databaseAccounts/cosmos-vec-eus-prd-cocktails-001' --principal-id 'd532fa56-2a0d-4dc0-82e1-b35ca21a6709'
+
+# List role assignments
+az cosmosdb sql role assignment list --account-name cosmos-vec-eus-prd-cocktails-001 --resource-group rg-vec-eus-prd-cocktails-001
+
+
+# Delete a role assignment
+az cosmosdb sql role assignment delete --account-name cosmos-vec-eus-prd-cocktails-001 --resource-group 'rg-vec-eus-prd-cocktails-001' --role-assignment-id '/subscriptions/1d9ecc00-242a-460d-8b08-b71db19f094e/resourceGroups/rg-vec-eus-prd-cocktails-001/providers/Microsoft.DocumentDB/databaseAccounts/cosmos-vec-eus-prd-cocktails-001/sqlRoleAssignments/52661a55-c24a-4c89-89ef-c8c89f9baee4'
+
+```
+
 ## ⚠️ Notes
 
 - Account names must be globally unique
