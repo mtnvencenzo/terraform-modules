@@ -35,6 +35,7 @@ variable "application_insights" {
   type = object({
     id                  = string
     instrumentation_key = string
+    sampling_percentage = optional(number, 5.0)
   })
 }
 

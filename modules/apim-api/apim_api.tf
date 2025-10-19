@@ -53,7 +53,7 @@ resource "azurerm_api_management_api_diagnostic" "apim_api_diagnostic" {
   api_management_name      = var.apim_instance.name
   api_management_logger_id = azurerm_api_management_logger.apim_appinsights_logger[0].id
 
-  sampling_percentage       = 5.0
+  sampling_percentage       = var.application_insights.sampling_percentage
   always_log_errors         = true
   log_client_ip             = true
   verbosity                 = "information"
