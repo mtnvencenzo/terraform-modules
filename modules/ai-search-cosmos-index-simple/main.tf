@@ -4,6 +4,10 @@ resource "restapi_object" "cosmos_datasource" {
   query_string = "api-version=2024-07-01"
   data         = var.cosmos_datasource_json
   id_attribute = "name" # The ID field on the response
+
+  lifecycle {
+    ignore_changes = [data]
+  }
 }
 
 
@@ -13,6 +17,10 @@ resource "restapi_object" "cosmos_standard_lucene_index" {
   query_string = "api-version=2024-07-01"
   data         = var.cosmos_standard_lucene_index_json
   id_attribute = "name" # The ID field on the response
+
+  lifecycle {
+    ignore_changes = [data]
+  }
 
   depends_on = [restapi_object.cosmos_datasource]
 }
