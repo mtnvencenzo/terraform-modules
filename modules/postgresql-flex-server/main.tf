@@ -11,11 +11,6 @@ resource "azurerm_postgresql_flexible_server" "postgresql_flexible_server" {
   version                = var.postgres_version
   create_mode            = var.create_mode
 
-  lifecycle {
-    prevent_destroy = true
-    ignore_changes  = ["zone"]
-  }
-
   tags = merge({
     Environment = var.environment
     Application = var.domain

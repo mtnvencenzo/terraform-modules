@@ -34,7 +34,6 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   }, var.tags)
 
   lifecycle {
-    prevent_destroy = true
     ignore_changes = [
       ip_range_filter
     ]

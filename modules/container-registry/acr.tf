@@ -16,7 +16,6 @@ resource "azurerm_container_registry" "acr" {
   }, var.tags)
 
   lifecycle {
-    prevent_destroy = true
     ignore_changes = [
       tags
     ]

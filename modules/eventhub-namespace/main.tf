@@ -18,10 +18,6 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
     ]
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   tags = merge({
     Environment = var.environment
     Application = var.domain

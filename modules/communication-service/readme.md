@@ -80,6 +80,5 @@ module "communication_service" {
 
 - Service names must be unique within the subscription
 - Review data location settings for compliance requirements
-- The service has prevent_destroy lifecycle rule enabled
 - Consider using private endpoints for enhanced security
 - Monitor service usage and adjust settings as needed

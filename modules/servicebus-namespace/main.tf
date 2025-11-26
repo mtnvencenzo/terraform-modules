@@ -24,10 +24,6 @@ resource "azurerm_servicebus_namespace" "servicebus_namespace" {
   #     }
   # }
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   tags = merge({
     Environment = var.environment
     Application = var.domain

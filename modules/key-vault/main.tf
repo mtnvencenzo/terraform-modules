@@ -21,10 +21,6 @@ resource "azurerm_key_vault" "keyvault" {
     default_action             = "Allow"
     virtual_network_subnet_ids = var.virtual_network_subnet_ids
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 
