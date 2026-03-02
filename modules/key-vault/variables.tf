@@ -69,3 +69,12 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "access_policies" {
+  type = list(object({
+    object_id          = string,
+    key_permissions    = optional(list(string), ["Get", "List"]),
+    secret_permissions = optional(list(string), ["Get", "List"])
+  }))
+  default = []
+}

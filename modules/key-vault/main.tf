@@ -36,6 +36,23 @@ resource "azurerm_key_vault_access_policy" "keyvault_pipeline_access_policy" {
   ]
 }
 
+resource "azurerm_key_vault_access_policy" "xtra_access_policies" {
+  for_each = tomap({
+    for access_policy in var.access_policies :
+    access_policy.object_id => access_policy
+  })
+
+  key_vault_id       = azurerm_key_vault.keyvault.id
+  tenant_id          = var.tenant_id
+  object_id          = each.value.object_id
+  key_permissions    = each.value.key_permissions
+  secret_permissions = each.value.secret_permissions
+
+  depends_on = [
+    azurerm_key_vault.keyvault
+  ]
+}
+
 resource "azurerm_key_vault_secret" "keyvault_secrets" {
   for_each = tomap({
     for secret in var.secrets :
