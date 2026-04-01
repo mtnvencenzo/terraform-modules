@@ -32,8 +32,14 @@ variable "sequence" {
   default = "001"
 }
 
-variable "storage" {
-  type = number
+variable "storage_mb" {
+  type    = number
+  default = 32768
+}
+
+variable "storage_tier" {
+  type    = string
+  default = "P4"
 }
 
 variable "sku" {
@@ -41,11 +47,11 @@ variable "sku" {
 }
 
 variable "delegated_subnet_id" {
-  type = string
+  type = Optional(string)
 }
 
 variable "private_dns_zone_id" {
-  type = string
+  type = Optional(string)
 }
 
 variable "administrator_login" {
@@ -56,10 +62,6 @@ variable "administrator_password" {
   type = string
 }
 
-variable "postgres_version" {
-  type = string
-}
-
 variable "create_mode" {
   type = string
 }
@@ -67,4 +69,19 @@ variable "create_mode" {
 variable "tags" {
   type    = map(string)
   default = {}
+}
+
+variable "auto_grow_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "version" {
+  type    = number
+  default = 18
+}
+
+variable "public_network_access_enabled" {
+  type    = bool
+  default = true
 }
