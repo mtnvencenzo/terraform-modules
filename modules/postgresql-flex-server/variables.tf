@@ -78,7 +78,7 @@ variable "auto_grow_enabled" {
   default = false
 }
 
-variable "version" {
+variable "postgres_version" {
   type    = number
   default = 18
 }

@@ -9,7 +9,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql_flexible_server" {
   sku_name                      = var.sku
   administrator_login           = var.administrator_login
   administrator_password        = var.administrator_password
-  version                       = var.version
+  version                       = var.postgres_version
   create_mode                   = var.create_mode
   auto_grow_enabled             = var.auto_grow_enabled
   public_network_access_enabled = var.public_network_access_enabled
