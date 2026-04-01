@@ -47,11 +47,11 @@ variable "sku" {
 }
 
 variable "delegated_subnet_id" {
-  type = Optional(string)
+  type = optional(string, null)
 }
 
 variable "private_dns_zone_id" {
-  type = Optional(string)
+  type = optional(string, null)
 }
 
 variable "administrator_login" {
