@@ -135,6 +135,16 @@ variable "startup_probe_relative_url" {
   type = string
 }
 
+variable "readiness_probe_relative_url" {
+  type    = string
+  default = null
+}
+
+variable "liveness_probe_relative_url" {
+  type    = string
+  default = null
+}
+
 variable "env_vars" {
   type = list(object({
     name  = string,

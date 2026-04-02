@@ -73,6 +73,32 @@ resource "azurerm_container_app" "aca" {
         timeout   = 10
       }
 
+      dynamic "readiness_probe" {
+        for_each = var.readiness_probe_relative_url != null ? [0] : []
+
+        content {
+          transport               = "HTTP"
+          port                    = var.ingress_target_port
+          path                    = "${var.readiness_probe_relative_url}?type=readiness_probe"
+          interval_seconds        = 15
+          timeout                 = 30
+          failure_count_threshold = 3
+        }
+      }
+
+      dynamic "liveness_probe" {
+        for_each = var.liveness_probe_relative_url != null ? [0] : []
+
+        content {
+          transport               = "HTTP"
+          port                    = var.ingress_target_port
+          path                    = "${var.liveness_probe_relative_url}?type=liveness_probe"
+          interval_seconds        = 15
+          timeout                 = 5
+          failure_count_threshold = 3
+        }
+      }
+
       # -------------------------------------------------------------------------------------------------
       # must set the managed identities client id to use with rbac / msi tokens to access other resources
       # see > https://github.com/microsoft/azure-container-apps/issues/325#issuecomment-1265380377
