@@ -26,10 +26,6 @@ variable "sequence" {
   default = "001"
 }
 
-variable "tenant_id" {
-  type = string
-}
-
 variable "resource_group_name" {
   type = string
 }
@@ -89,11 +85,12 @@ variable "container_registry" {
   })
 }
 
-variable "key_vault" {
-  type = object({
+variable "key_vaults" {
+  type = map(object({
     id   = string,
     name = string
-  })
+  }))
+  description = "Map of key vaults the container app needs access to. Keys are logical names referenced by secrets via key_vault_key."
 }
 
 variable "container" {
@@ -116,9 +113,11 @@ variable "container" {
 variable "secrets" {
   type = list(object({
     name                  = string,
-    key_vault_secret_name = string
+    key_vault_secret_name = string,
+    key_vault_key         = optional(string, "default")
   }))
-  default = []
+  default     = []
+  description = "List of Key Vault secrets to mount. key_vault_key references a key in var.key_vaults (defaults to 'default')."
 }
 
 variable "min_replicas" {

@@ -42,7 +42,7 @@ resource "azurerm_container_app" "aca" {
     content {
       name                = secret.value["name"]
       identity            = azurerm_user_assigned_identity.aca_user_identity.id
-      key_vault_secret_id = "https://${var.key_vault.name}.vault.azure.net/secrets/${secret.value["key_vault_secret_name"]}"
+      key_vault_secret_id = "https://${var.key_vaults[secret.value["key_vault_key"]].name}.vault.azure.net/secrets/${secret.value["key_vault_secret_name"]}"
     }
   }
 
