@@ -100,14 +100,29 @@ variable "container" {
     image_tag  = string
     cpu        = number
     memory     = string
+    volume_mounts = optional(list(object({
+      name = string
+      path = string
+    })), [])
   })
   default = {
-    name       = null
-    image_name = null
-    image_tag  = null
-    cpu        = 0.25
-    memory     = "0.5Gi"
+    name          = null
+    image_name    = null
+    image_tag     = null
+    cpu           = 0.25
+    memory        = "0.5Gi"
+    volume_mounts = []
   }
+}
+
+variable "volumes" {
+  type = list(object({
+    name         = string
+    storage_name = string
+    storage_type = string
+  }))
+  default     = []
+  description = "List of volumes to attach to the container app. Each volume references an environment-level storage resource."
 }
 
 variable "secrets" {
