@@ -6,7 +6,11 @@ resource "azurerm_dns_txt_record" "dns_txt_record" {
 
   tags = var.tags
 
-  record {
-    value = var.value
+  dynamic "record" {
+    for_each = var.values
+
+    content {
+      value = record.value
+    }
   }
 }

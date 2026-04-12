@@ -14,8 +14,8 @@ variable "name" {
   type = string
 }
 
-variable "value" {
-  type = string
+variable "values" {
+  type = list(string)
 }
 
 variable "tags" {
