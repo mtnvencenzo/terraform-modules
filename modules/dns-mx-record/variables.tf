@@ -11,7 +11,8 @@ variable "ttl" {
 }
 
 variable "spf_include_domain" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "dkim_record" {
