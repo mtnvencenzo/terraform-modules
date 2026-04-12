@@ -16,6 +16,7 @@ resource "azurerm_dns_mx_record" "dns_mx_record" {
 }
 
 resource "azurerm_dns_txt_record" "dns_mx_spf_record" {
+  count               = var.spf_include_domain != null && var.spf_include_domain != "" ? 1 : 0
   name                = "@"
   zone_name           = var.dns_zone.name
   resource_group_name = var.dns_zone.resource_group_name
