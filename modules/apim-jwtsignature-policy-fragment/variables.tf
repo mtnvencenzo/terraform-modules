@@ -14,9 +14,12 @@ variable "name_discriminator" {
   description = "The name discriminator for the api management instance"
 }
 
-variable "apim_instance_id" {
-  type        = string
-  description = "The id of the api management instance"
+variable "apim_instance" {
+  type = object({
+    id                  = string
+    name                = string
+    resource_group_name = string
+  })
 }
 
 variable "issuers" {

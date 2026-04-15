@@ -13,7 +13,7 @@ resource "azurerm_api_management_named_value" "jwt_signature_signing_secret" {
 
 
 resource "azurerm_api_management_policy_fragment" "jwtsignature_policy_fragment" {
-  api_management_id = var.apim_instance_id
+  api_management_id = var.apim_instance.id
   name              = "${var.environment}-${var.domain}-${var.name_discriminator}-jwtsignature-policy"
   format            = "xml"
   value             = <<XML
