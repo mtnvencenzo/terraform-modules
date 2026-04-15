@@ -33,4 +33,6 @@ resource "azurerm_api_management_policy_fragment" "jwtsignature_policy_fragment"
         </validate-jwt>
       </fragment>
     XML
+
+  depends_on = [azurerm_api_management_named_value.jwt_signature_signing_secret]
 }
