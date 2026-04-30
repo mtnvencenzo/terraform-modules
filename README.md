@@ -189,13 +189,6 @@ Make sure to:
 1. Add your SSH private key as a repository secret named `terraform_module_repo_access_key_secret`.  This should match the corresponding public key in the repository.
 2. Ensure the workflow has the necessary permissions to access the secrets
 
-## 🌐 Community & Support
-
-- 🤝 **Contributing Guide** – review expectations and workflow in [CONTRIBUTING.md](./.github/CONTRIBUTING.md)  
-- 🤗 **Code of Conduct** – help us keep the community welcoming by reading [CODE_OF_CONDUCT.md](./.github/CODE_OF_CONDUCT.md)  
-- 🆘 **Support Guide** – find help channels in [SUPPORT.md](./.github/SUPPORT.md)  
-- 🔒 **Security Policy** – report vulnerabilities responsibly via [SECURITY.md](./.github/SECURITY.md) 
-
 
 ## 📄 License
 
