@@ -3,9 +3,7 @@ resource "azurerm_servicebus_subscription_rule" "servucebus_subscription_rule" {
   name            = "sql-${var.name}"
   filter_type     = "SqlFilter"
 
-  sql_filter = {
-    sql_expression = var.sql_expression
-  }
+  sql_filter = var.sql_expression
 
   action = var.action
 }
